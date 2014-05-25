@@ -23,7 +23,7 @@ import java.util.Locale;
  * Окноу экс'порта наборов изменений в файл
  */
 @Slf4j
-public class CreateChangelogFrame extends JFrame {
+public class CreateChangelogFrame extends JFrame implements CloseableFrame{
 
     private LbUtilApp app;
 
@@ -40,7 +40,6 @@ public class CreateChangelogFrame extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Экспорт набора изменений Liquibase");
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setJMenuBar(new MainMenuBar(this));
 
         dbConnectionPanel = new DbConnectionPanel();
@@ -161,7 +160,7 @@ public class CreateChangelogFrame extends JFrame {
                 .setChangelogFile(changelogFilePanel.getChangelogFile());
     }
 
-    public void closeApplication() {
+    public void closeApp() {
         int confirm = JOptionPane.showOptionDialog(this,
                 "Закрыть приложение?",
                 "Экспорт набора изменений Liquibase", JOptionPane.YES_NO_OPTION,

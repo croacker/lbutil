@@ -4,7 +4,7 @@ import lombok.Getter;
 
 /**
  * Created with IntelliJ IDEA.
- * User: a_gumenyuk
+ * User: croacker
  * Date: 23.04.14
  * Time: 18:52
  * Соединение с БД

@@ -2,8 +2,11 @@ package ru.croacker.lbutil.ui;
 
 import lombok.extern.slf4j.Slf4j;
 import ru.croacker.lbutil.LbUtilApp;
+import ru.croacker.lbutil.ui.create.MainMenuBar;
 
 import javax.swing.*;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,17 +16,11 @@ import javax.swing.*;
  * Главное - окно приложения
  */
 @Slf4j
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements CloseableFrame, Observer {
 
     private LbUtilApp app;
 
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -33,12 +30,18 @@ public class MainFrame extends JFrame {
     private javax.swing.JTextField jtCurrentConnection;
     private javax.swing.JToolBar jtbMain;
 
+    public MainFrame(LbUtilApp app) {
+        this.app = app;
+        initComponents();
+    }
+
     private void initComponents() {
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setTitle("Наборы изменений Liquibase");
+        setJMenuBar(new MainMenuBar(this));
 
         jpmConnections = new javax.swing.JPopupMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jtbMain = new javax.swing.JToolBar();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -47,18 +50,6 @@ public class MainFrame extends JFrame {
         jtCurrentConnection = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jbTestConnection = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-
-        jMenuItem1.setText("jMenuItem1");
-        jpmConnections.add(jMenuItem1);
-
-        jMenuItem2.setText("jMenuItem2");
-        jpmConnections.add(jMenuItem2);
-
-        jMenuItem3.setText("jMenuItem3");
-        jpmConnections.add(jMenuItem3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,14 +113,6 @@ public class MainFrame extends JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,5 +131,22 @@ public class MainFrame extends JFrame {
         pack();
     }
 
+    public void closeApp() {
+        int confirm = JOptionPane.showOptionDialog(this,
+                "Закрыть приложение?",
+                "Экспорт набора изменений Liquibase", JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, null, null);
 
+        if (confirm == JOptionPane.YES_OPTION) {
+            app.close();
+        }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        JOptionPane.showOptionDialog(this,
+                "Обновить соединение?",
+                "Обновить соединение", JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, null, null);
+    }
 }

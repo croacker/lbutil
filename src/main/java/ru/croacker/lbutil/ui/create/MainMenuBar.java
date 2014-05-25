@@ -1,5 +1,7 @@
 package ru.croacker.lbutil.ui.create;
 
+import ru.croacker.lbutil.LbUtilApp;
+import ru.croacker.lbutil.ui.CloseableFrame;
 import ru.croacker.lbutil.ui.CreateChangelogFrame;
 
 import javax.swing.*;
@@ -12,7 +14,7 @@ import java.awt.event.ActionListener;
 public class MainMenuBar extends JMenuBar {
 
     //TODO:to interface
-    private CreateChangelogFrame parent;
+    private CloseableFrame closeableFrame;
 
     private JMenu jmFile;
     private JMenuItem jmiExit;
@@ -23,8 +25,8 @@ public class MainMenuBar extends JMenuBar {
     private JMenu jmHelp;
     private JMenuItem jmiAbout;
 
-    public MainMenuBar(CreateChangelogFrame parent){
-        this.parent = parent;
+    public MainMenuBar(CloseableFrame closeableFrame){
+        this.closeableFrame = closeableFrame;
         initComponents();
     }
 
@@ -50,7 +52,7 @@ public class MainMenuBar extends JMenuBar {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                parent.closeApplication();
+                closeableFrame.closeApp();
             }
         };
     }
