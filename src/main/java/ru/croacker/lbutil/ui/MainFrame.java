@@ -5,6 +5,7 @@ import ru.croacker.lbutil.LbUtilApp;
 import ru.croacker.lbutil.ui.create.MainMenuBar;
 
 import javax.swing.*;
+import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 

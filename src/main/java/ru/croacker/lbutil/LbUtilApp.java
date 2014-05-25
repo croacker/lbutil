@@ -24,9 +24,9 @@ public class LbUtilApp implements Runnable {
 
     public static void main( String[] args )
     {
-        PreferenceService.getInstance().getConnectionsNames();
         Runnable application = new LbUtilApp();
         application.run();
+        PreferenceService.getInstance().getConnectionsNames();
     }
 
     private void initLookAndFeel() {
