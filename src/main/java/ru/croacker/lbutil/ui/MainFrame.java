@@ -2,10 +2,12 @@ package ru.croacker.lbutil.ui;
 
 import lombok.extern.slf4j.Slf4j;
 import ru.croacker.lbutil.LbUtilApp;
-import ru.croacker.lbutil.ui.create.MainMenuBar;
+import ru.croacker.lbutil.ui.component.MainMenuBar;
+import ru.croacker.lbutil.ui.component.main.ConnectionsPopupMenu;
+import ru.croacker.lbutil.ui.component.main.JlConnections;
+import ru.croacker.lbutil.ui.model.ConnectionUnitModel;
 
 import javax.swing.*;
-import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -27,7 +29,6 @@ public class MainFrame extends JFrame implements CloseableFrame, Observer {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbTestConnection;
     private javax.swing.JList jlConnections;
-    private javax.swing.JPopupMenu jpmConnections;
     private javax.swing.JTextField jtCurrentConnection;
     private javax.swing.JToolBar jtbMain;
 
@@ -42,12 +43,11 @@ public class MainFrame extends JFrame implements CloseableFrame, Observer {
         setTitle("Наборы изменений Liquibase");
         setJMenuBar(new MainMenuBar(this));
 
-        jpmConnections = new javax.swing.JPopupMenu();
         jtbMain = new javax.swing.JToolBar();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jlConnections = new javax.swing.JList();
+        jlConnections = new JlConnections(app, new ConnectionUnitModel());
         jtCurrentConnection = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jbTestConnection = new javax.swing.JButton();
@@ -58,12 +58,7 @@ public class MainFrame extends JFrame implements CloseableFrame, Observer {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jlConnections.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jlConnections.setComponentPopupMenu(jpmConnections);
+        jlConnections.setComponentPopupMenu(new ConnectionsPopupMenu());
         jScrollPane1.setViewportView(jlConnections);
 
         jtCurrentConnection.setEditable(false);
