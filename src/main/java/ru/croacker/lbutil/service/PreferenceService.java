@@ -3,13 +3,10 @@ package ru.croacker.lbutil.service;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.configuration.AbstractConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.DefaultConfigurationBuilder;
 import org.apache.commons.configuration.XMLConfiguration;
 import ru.croacker.lbutil.dto.ConnectionDto;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.List;
 import java.util.Properties;
 
 /**
@@ -17,7 +14,7 @@ import java.util.Properties;
  * User: croacker
  * Date: 25.05.14
  * Time: 15:42
- * To change this template use File | Settings | File Templates.
+ *
  */
 @Slf4j
 public class PreferenceService {

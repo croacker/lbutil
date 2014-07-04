@@ -31,7 +31,10 @@ public class LbRuner {
     }
 
     public void writeChangelog() throws LiquibaseException, IOException, ParserConfigurationException {
-        CommandLineUtils.doGenerateChangeLog(dbConnection.getChangelogFile(), getDatabase(), null, null,
+        CommandLineUtils.doGenerateChangeLog(
+                //dbConnection.getChangelogFile()
+                ""
+                , getDatabase(), null, null,
                null, "samebadu", null, null, new DiffOutputControl());
     }
 }

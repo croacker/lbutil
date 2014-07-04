@@ -156,8 +156,8 @@ public class CreateChangelogFrame extends JFrame implements CloseableFrame{
                 .setJdbcDriver(dbConnectionPanel.getJdbcDriverName())
                 .setUrl(dbConnectionPanel.getUrl())
                 .setUser(dbConnectionPanel.getUser())
-                .setPassword(dbConnectionPanel.getPassword())
-                .setChangelogFile(changelogFilePanel.getChangelogFile());
+                .setPassword(dbConnectionPanel.getPassword());
+//                .setChangelogFile(changelogFilePanel.getChangelogFile());
     }
 
     public void closeApp() {

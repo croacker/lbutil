@@ -2,9 +2,14 @@ package ru.croacker.lbutil.ui;
 
 import lombok.extern.slf4j.Slf4j;
 import ru.croacker.lbutil.LbUtilApp;
+import ru.croacker.lbutil.database.DbConnection;
+import ru.croacker.lbutil.database.JdbcDriver;
+import ru.croacker.lbutil.ui.connection.ConnectionListModel;
 import ru.croacker.lbutil.ui.create.MainMenuBar;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
@@ -27,7 +32,6 @@ public class MainFrame extends JFrame implements CloseableFrame, Observer {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbTestConnection;
     private javax.swing.JList jlConnections;
-    private javax.swing.JPopupMenu jpmConnections;
     private javax.swing.JTextField jtCurrentConnection;
     private javax.swing.JToolBar jtbMain;
 
@@ -42,7 +46,6 @@ public class MainFrame extends JFrame implements CloseableFrame, Observer {
         setTitle("Наборы изменений Liquibase");
         setJMenuBar(new MainMenuBar(this));
 
-        jpmConnections = new javax.swing.JPopupMenu();
         jtbMain = new javax.swing.JToolBar();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -58,12 +61,8 @@ public class MainFrame extends JFrame implements CloseableFrame, Observer {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jlConnections.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jlConnections.setComponentPopupMenu(jpmConnections);
+        jlConnections.setModel(getStubConnectionsListModel());
+        jlConnections.setComponentPopupMenu(getPopupMenu());
         jScrollPane1.setViewportView(jlConnections);
 
         jtCurrentConnection.setEditable(false);
@@ -132,6 +131,30 @@ public class MainFrame extends JFrame implements CloseableFrame, Observer {
         pack();
     }
 
+    private ListModel getStubConnectionsListModel() {
+        ConnectionListModel connectionListModel = new ConnectionListModel();
+        connectionListModel.add(
+        new DbConnection().setJdbcDriver(JdbcDriver.H2.getDriverName())
+                .setUrl("jdbc:h2:tcp://localhost/~/master;MODE=Oracle")
+                .setUser("master")
+                .setPassword("123"));
+
+        connectionListModel.add(
+                new DbConnection().setJdbcDriver(JdbcDriver.POSTGRESQL.getDriverName())
+                        .setUrl("jdbc:postgresql://host/database")
+                        .setUser("postgre")
+                        .setPassword("postgre"));
+
+        connectionListModel.add(
+                new DbConnection().setJdbcDriver(JdbcDriver.ORACLE.getDriverName())
+                        .setUrl("jdbc:oracle:kprb:uts@//123")
+                        .setUser("uts")
+                        .setPassword("123"));
+
+
+        return connectionListModel;  //To change body of created methods use File | Settings | File Templates.
+    }
+
     public void closeApp() {
         int confirm = JOptionPane.showOptionDialog(this,
                 "Закрыть приложение?",
@@ -149,5 +172,53 @@ public class MainFrame extends JFrame implements CloseableFrame, Observer {
                 "Обновить соединение?",
                 "Обновить соединение", JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, null, null);
+    }
+
+    private JPopupMenu getPopupMenu(){
+        JPopupMenu jpmConnections = new JPopupMenu();
+
+        JMenuItem item = new JMenuItem("Добавить");
+        item.setHorizontalTextPosition(JMenuItem.LEFT);
+        item.addActionListener(getAddActionListener());
+        jpmConnections.add(item);
+
+        item = new JMenuItem("Редактировать");
+        item.setHorizontalTextPosition(JMenuItem.LEFT);
+        item.addActionListener(getEditActionListener());
+        jpmConnections.add(item);
+
+        item = new JMenuItem("Удалить");
+        item.setHorizontalTextPosition(JMenuItem.LEFT);
+        item.addActionListener(getRemoveActionListener());
+        jpmConnections.add(item);
+
+        return jpmConnections;
+    }
+
+    private ActionListener getAddActionListener(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //To change body of implemented methods use File | Settings | File Templates.
+            }
+        };
+    }
+
+    private ActionListener getEditActionListener() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //To change body of implemented methods use File | Settings | File Templates.
+            }
+        };
+    }
+
+    private ActionListener getRemoveActionListener() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //To change body of implemented methods use File | Settings | File Templates.
+            }
+        };
     }
 }
