@@ -1,9 +1,9 @@
 package ru.croacker.lbutil.ui;
 
-import ru.croacker.lbutil.ui.create.DbConnectionPanel;
+import ru.croacker.lbutil.LbUtilApp;
+import ru.croacker.lbutil.ui.component.DbConnectionPanel;
 
 import javax.swing.*;
-import java.util.Observable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,6 +14,16 @@ import java.util.Observable;
  */
 public class DbConnectionFrame extends JFrame{
 
+    private LbUtilApp app;
+
     private DbConnectionPanel dbConnectionPanel;
+
+    public DbConnectionFrame(LbUtilApp app){
+        this.app = app;
+    }
+
+    private void initComponents() {
+
+    }
 
 }

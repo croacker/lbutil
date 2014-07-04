@@ -1,8 +1,6 @@
-package ru.croacker.lbutil.ui.create;
+package ru.croacker.lbutil.ui.component;
 
-import ru.croacker.lbutil.LbUtilApp;
 import ru.croacker.lbutil.ui.CloseableFrame;
-import ru.croacker.lbutil.ui.CreateChangelogFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

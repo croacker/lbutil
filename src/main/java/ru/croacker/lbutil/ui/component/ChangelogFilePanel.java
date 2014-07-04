@@ -1,4 +1,4 @@
-package ru.croacker.lbutil.ui.create;
+package ru.croacker.lbutil.ui.component;
 
 import lombok.Getter;
 

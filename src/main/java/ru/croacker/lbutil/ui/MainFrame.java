@@ -32,6 +32,7 @@ public class MainFrame extends JFrame implements CloseableFrame, Observer {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbTestConnection;
     private javax.swing.JList jlConnections;
+    private javax.swing.JPopupMenu jpmConnections;
     private javax.swing.JTextField jtCurrentConnection;
     private javax.swing.JToolBar jtbMain;
 
@@ -46,6 +47,7 @@ public class MainFrame extends JFrame implements CloseableFrame, Observer {
         setTitle("Наборы изменений Liquibase");
         setJMenuBar(new MainMenuBar(this));
 
+        jpmConnections = new javax.swing.JPopupMenu();
         jtbMain = new javax.swing.JToolBar();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();

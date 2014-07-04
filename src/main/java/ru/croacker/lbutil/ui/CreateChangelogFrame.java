@@ -7,9 +7,8 @@ import org.apache.commons.lang.StringUtils;
 import ru.croacker.lbutil.LbUtilApp;
 import ru.croacker.lbutil.database.DbConnection;
 import ru.croacker.lbutil.liquibase.LbRuner;
-import ru.croacker.lbutil.ui.create.ChangelogFilePanel;
-import ru.croacker.lbutil.ui.create.DbConnectionPanel;
-import ru.croacker.lbutil.ui.create.MainMenuBar;
+import ru.croacker.lbutil.ui.component.ChangelogFilePanel;
+import ru.croacker.lbutil.ui.component.DbConnectionPanel;
 
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
@@ -40,7 +39,6 @@ public class CreateChangelogFrame extends JFrame implements CloseableFrame{
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Экспорт набора изменений Liquibase");
-        setJMenuBar(new MainMenuBar(this));
 
         dbConnectionPanel = new DbConnectionPanel();
         dbConnectionPanel.getJbTestConnection().addActionListener(getClickTestConnectionListener());
