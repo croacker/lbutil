@@ -10,7 +10,6 @@ import ru.croacker.lbutil.ui.create.MainMenuBar;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -129,8 +128,11 @@ public class MainFrame extends JFrame implements CloseableFrame, Observer {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
         pack();
+    }
+
+    private void setJMenuBar(MainMenuBar mainMenuBar) {
+
     }
 
     private ListModel getStubConnectionsListModel() {
