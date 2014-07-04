@@ -5,7 +5,6 @@ import ru.croacker.lbutil.LbUtilApp;
 import ru.croacker.lbutil.database.DbConnection;
 import ru.croacker.lbutil.database.JdbcDriver;
 import ru.croacker.lbutil.ui.connection.ConnectionListModel;
-import ru.croacker.lbutil.ui.create.MainMenuBar;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -44,6 +43,7 @@ public class MainFrame extends JFrame implements CloseableFrame, Observer {
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Наборы изменений Liquibase");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setJMenuBar(new MainMenuBar(this));
 
         jpmConnections = new javax.swing.JPopupMenu();
@@ -55,8 +55,6 @@ public class MainFrame extends JFrame implements CloseableFrame, Observer {
         jtCurrentConnection = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jbTestConnection = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jtbMain.setRollover(true);
 
@@ -129,10 +127,6 @@ public class MainFrame extends JFrame implements CloseableFrame, Observer {
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pack();
-    }
-
-    private void setJMenuBar(MainMenuBar mainMenuBar) {
-
     }
 
     private ListModel getStubConnectionsListModel() {
