@@ -18,15 +18,9 @@ import ru.croacker.lbutil.ui.model.ConnectionUnitModel;
 public class MainFrm extends javax.swing.JFrame {
 
   private ImportChangelogPanel jpImport;
-  private javax.swing.JButton jbExport;
-  private javax.swing.JButton jbImport;
-  private javax.swing.JButton jbSelectExportFile;
-  private javax.swing.JButton jbSelectImportFile;
   private javax.swing.JButton jbTestConnection;
   private JdbDriverCombobox jcbJdbcDriver;
   private ConnectionsList jlConnectionsList;
-  private javax.swing.JLabel jlExportFile;
-  private javax.swing.JLabel jlImportFile;
   private javax.swing.JLabel jlJdbcDriver;
   private javax.swing.JLabel jlPassword;
   private javax.swing.JLabel jlUrl;
@@ -41,11 +35,9 @@ public class MainFrm extends javax.swing.JFrame {
   private javax.swing.JPanel jpConnection;
   private javax.swing.JPanel jpConnectionsListPanel;
   private javax.swing.JPanel jpContent;
-  private javax.swing.JPanel jpExport;
+  private ExportChangelogPanel jpExport;
   private javax.swing.JScrollPane jspConnectionsListScrolPanel;
   private javax.swing.JToolBar jtbMain;
-  private javax.swing.JTextField jtfExportFile;
-  private javax.swing.JTextField jtfImportFile;
   private javax.swing.JTextField jtfPassword;
   private javax.swing.JTextField jtfUrl;
   private javax.swing.JTextField jtfUser;
@@ -75,15 +67,7 @@ public class MainFrm extends javax.swing.JFrame {
     jtfPassword = new javax.swing.JTextField();
     jbTestConnection = new javax.swing.JButton();
     jpExport = new ExportChangelogPanel();
-    jlExportFile = new javax.swing.JLabel();
-    jtfExportFile = new javax.swing.JTextField();
-    jbSelectExportFile = new javax.swing.JButton();
-    jbExport = new javax.swing.JButton();
     jpImport = new ImportChangelogPanel();
-    jlImportFile = new javax.swing.JLabel();
-    jtfImportFile = new javax.swing.JTextField();
-    jbSelectImportFile = new javax.swing.JButton();
-    jbImport = new javax.swing.JButton();
     jmbMain = new javax.swing.JMenuBar();
     jmFile = new javax.swing.JMenu();
     jmiExit = new javax.swing.JMenuItem();
@@ -169,78 +153,6 @@ public class MainFrm extends javax.swing.JFrame {
                         .addComponent(jlPassword)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbTestConnection)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-    );
-
-    jpExport.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    jpExport.setToolTipText("Экспорт");
-
-    jlExportFile.setText("Файл:");
-
-    jbSelectExportFile.setText("...");
-
-    jbExport.setText("Экспорт");
-
-    javax.swing.GroupLayout jpExportLayout = new javax.swing.GroupLayout(jpExport);
-    jpExport.setLayout(jpExportLayout);
-    jpExportLayout.setHorizontalGroup(
-        jpExportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpExportLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlExportFile)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfExportFile, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbSelectExportFile, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(jbExport)
-                .addContainerGap())
-    );
-    jpExportLayout.setVerticalGroup(
-        jpExportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpExportLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpExportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlExportFile)
-                    .addComponent(jtfExportFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbSelectExportFile)
-                    .addComponent(jbExport))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-    );
-
-    jpImport.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    jpImport.setToolTipText("Импорт");
-
-    jlImportFile.setText("Файл:");
-
-    jbSelectImportFile.setText("...");
-
-    jbImport.setText("Импорт");
-
-    javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jpImport);
-    jpImport.setLayout(jPanel5Layout);
-    jPanel5Layout.setHorizontalGroup(
-        jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlImportFile)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfImportFile)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbSelectImportFile, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(jbImport, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-    );
-    jPanel5Layout.setVerticalGroup(
-        jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlImportFile)
-                    .addComponent(jtfImportFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbSelectImportFile)
-                    .addComponent(jbImport))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
