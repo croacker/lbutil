@@ -1,6 +1,7 @@
 package ru.croacker.lbutil;
 
 import lombok.extern.slf4j.Slf4j;
+import ru.croacker.lbutil.nui.MainFrm;
 import ru.croacker.lbutil.service.PreferenceService;
 import ru.croacker.lbutil.ui.MainFrame;
 
@@ -16,7 +17,7 @@ public class LbUtilApp implements Runnable {
 
     public void run() {
         initLookAndFeel();
-        frmMain = new MainFrame(this);
+        frmMain = new MainFrm(this);
         frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frmMain.setVisible(true);
     }

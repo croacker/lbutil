@@ -7,31 +7,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: a_gumenyuk
- * Date: 15.06.14
- * Time: 16:27
  * Модель для отображения списка соединений
  */
-public class ConnectionUnitModel extends AbstractListModel {
+public class ConnectionUnitModel<DbConnection> extends AbstractListModel<DbConnection> {
 
-    private List<DbConnection> connections = new ArrayList<>();
+  private List<DbConnection> connections = new ArrayList<>();
 
-    public List<DbConnection> getConnections() {
-        return connections;
-    }
+  public List<DbConnection> getConnections() {
+    return connections;
+  }
 
-    public void setConnections(List<DbConnection> connections) {
-        this.connections = connections;
-    }
+  public void setConnections(List<DbConnection> connections) {
+    this.connections = connections;
+  }
 
-    @Override
-    public int getSize() {
-        return getConnections().size();
-    }
+  @Override
+  public int getSize() {
+    return getConnections().size();
+  }
 
-    @Override
-    public Object getElementAt(int index) {
-        return getConnections().get(index);
-    }
+  @Override
+  public DbConnection getElementAt(int index) {
+    return getConnections().get(index);
+  }
+
+  public void addConnection(DbConnection connection){
+    getConnections().add(connection);
+  }
 }

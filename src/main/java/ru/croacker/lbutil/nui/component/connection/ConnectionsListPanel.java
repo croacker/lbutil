@@ -1,4 +1,4 @@
-package ru.croacker.lbutil.nui.component.connectionslist;
+package ru.croacker.lbutil.nui.component.connection;
 
 import javax.swing.*;
 
