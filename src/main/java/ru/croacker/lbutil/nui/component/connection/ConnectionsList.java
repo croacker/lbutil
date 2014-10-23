@@ -13,7 +13,7 @@ public class ConnectionsList extends JList<ConnectionUnitModel> {
   }
 
   private void initComponents() {
-
+    setModel(new ConnectionUnitModel());
   }
 
 

@@ -15,6 +15,7 @@ public class ConnectionPanel extends JPanel {
     setToolTipText("Параметры соединения");
     setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+
   }
 
 }

@@ -20,7 +20,6 @@ public class MainFrm extends javax.swing.JFrame {
   private ImportChangelogPanel jpImport;
   private javax.swing.JButton jbTestConnection;
   private JdbDriverCombobox jcbJdbcDriver;
-  private ConnectionsList jlConnectionsList;
   private javax.swing.JLabel jlJdbcDriver;
   private javax.swing.JLabel jlPassword;
   private javax.swing.JLabel jlUrl;
@@ -36,7 +35,6 @@ public class MainFrm extends javax.swing.JFrame {
   private javax.swing.JPanel jpConnectionsListPanel;
   private javax.swing.JPanel jpContent;
   private ExportChangelogPanel jpExport;
-  private javax.swing.JScrollPane jspConnectionsListScrolPanel;
   private javax.swing.JToolBar jtbMain;
   private javax.swing.JTextField jtfPassword;
   private javax.swing.JTextField jtfUrl;
@@ -53,9 +51,7 @@ public class MainFrm extends javax.swing.JFrame {
 
     jpContent = new javax.swing.JPanel();
     jpConnectionsListPanel = new ConnectionsListPanel();
-    jspConnectionsListScrolPanel = new javax.swing.JScrollPane();
 
-    jlConnectionsList = new ConnectionsList();
     jpConnection = new ConnectionPanel();
     jlJdbcDriver = new javax.swing.JLabel();
     jcbJdbcDriver = new JdbDriverCombobox();
@@ -77,23 +73,6 @@ public class MainFrm extends javax.swing.JFrame {
     jmiAbout = new javax.swing.JMenuItem();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-    jlConnectionsList.setModel(new ConnectionUnitModel());
-    jlConnectionsList.setComponentPopupMenu(new ConnectionsPopupMenu());
-    jspConnectionsListScrolPanel.setViewportView(jlConnectionsList);
-
-    javax.swing.GroupLayout jpConnectionsListLayout = new javax.swing.GroupLayout(jpConnectionsListPanel);
-    jpConnectionsListPanel.setLayout(jpConnectionsListLayout);
-    jpConnectionsListLayout.setHorizontalGroup(
-        jpConnectionsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpConnectionsListLayout.createSequentialGroup()
-                .addComponent(jspConnectionsListScrolPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
-    );
-    jpConnectionsListLayout.setVerticalGroup(
-        jpConnectionsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspConnectionsListScrolPanel)
-    );
 
     jlJdbcDriver.setText("JDBC-הנאיגונ:");
 
