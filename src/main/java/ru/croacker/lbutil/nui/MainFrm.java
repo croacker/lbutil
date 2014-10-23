@@ -2,6 +2,7 @@ package ru.croacker.lbutil.nui;
 
 import ru.croacker.lbutil.LbUtilApp;
 import ru.croacker.lbutil.nui.component.ConnectionsPopupMenu;
+import ru.croacker.lbutil.nui.component.MainMenuBar;
 import ru.croacker.lbutil.nui.component.connection.ConnectionPanel;
 import ru.croacker.lbutil.nui.component.connection.ConnectionsList;
 import ru.croacker.lbutil.nui.component.connection.ConnectionsListPanel;
@@ -27,7 +28,7 @@ public class MainFrm extends javax.swing.JFrame {
   private javax.swing.JMenu jmFile;
   private javax.swing.JMenu jmHelp;
   private javax.swing.JMenu jmService;
-  private javax.swing.JMenuBar jmbMain;
+  private MainMenuBar jmbMain;
   private javax.swing.JMenuItem jmiAbout;
   private javax.swing.JMenuItem jmiExit;
   private javax.swing.JMenuItem jmiParameters;
@@ -35,10 +36,10 @@ public class MainFrm extends javax.swing.JFrame {
   private javax.swing.JPanel jpConnectionsListPanel;
   private javax.swing.JPanel jpContent;
   private ExportChangelogPanel jpExport;
-  private javax.swing.JToolBar jtbMain;
-  private javax.swing.JTextField jtfPassword;
-  private javax.swing.JTextField jtfUrl;
-  private javax.swing.JTextField jtfUser;
+  private MainToolBar jtbMain;
+//  private javax.swing.JTextField jtfPassword;
+//  private javax.swing.JTextField jtfUrl;
+//  private javax.swing.JTextField jtfUser;
 
   public MainFrm(LbUtilApp app) {
     initComponents();
@@ -54,17 +55,17 @@ public class MainFrm extends javax.swing.JFrame {
 
     jpConnection = new ConnectionPanel();
     jlJdbcDriver = new javax.swing.JLabel();
-    jcbJdbcDriver = new JdbDriverCombobox();
-    jlUrl = new javax.swing.JLabel();
-    jtfUrl = new javax.swing.JTextField();
-    jlUser = new javax.swing.JLabel();
-    jlPassword = new javax.swing.JLabel();
-    jtfUser = new javax.swing.JTextField();
-    jtfPassword = new javax.swing.JTextField();
+//    jcbJdbcDriver = new JdbDriverCombobox();
+//    jlUrl = new javax.swing.JLabel();
+//    jtfUrl = new javax.swing.JTextField();
+//    jlUser = new javax.swing.JLabel();
+//    jlPassword = new javax.swing.JLabel();
+//    jtfUser = new javax.swing.JTextField();
+//    jtfPassword = new javax.swing.JTextField();
     jbTestConnection = new javax.swing.JButton();
     jpExport = new ExportChangelogPanel();
     jpImport = new ImportChangelogPanel();
-    jmbMain = new javax.swing.JMenuBar();
+    jmbMain = new MainMenuBar();
     jmFile = new javax.swing.JMenu();
     jmiExit = new javax.swing.JMenuItem();
     jmService = new javax.swing.JMenu();
@@ -74,15 +75,15 @@ public class MainFrm extends javax.swing.JFrame {
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-    jlJdbcDriver.setText("JDBC-драйвер:");
+//    jlJdbcDriver.setText("JDBC-драйвер:");
 
-    jlUrl.setText("URL:");
+//    jlUrl.setText("URL:");
+//
+//    jlUser.setText("Пользователь:");
 
-    jlUser.setText("Пользователь:");
+//    jlPassword.setText("Пароль:");
 
-    jlPassword.setText("Пароль:");
-
-    jbTestConnection.setText("Проверить");
+//    jbTestConnection.setText("Проверить");
 
     javax.swing.GroupLayout jpConnectionLayout = new javax.swing.GroupLayout(jpConnection);
     jpConnection.setLayout(jpConnectionLayout);
