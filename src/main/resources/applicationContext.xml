@@ -12,7 +12,8 @@
     <import resource="swing-components.xml"/>
 
     <context:component-scan base-package="ru.croacker.lbutil.service"/>
-    <context:component-scan base-package="ru.croacker.lbutil.nui.component"/>
-    <bean id="mainFrm" class="ru.croacker.lbutil.nui.MainFrm" scope="singleton"/>
+    <context:component-scan base-package="ru.croacker.lbutil.nui"/>
+
+    <bean name="lbUtilApp" class="ru.croacker.lbutil.LbUtilApp"/>
 
 </beans>

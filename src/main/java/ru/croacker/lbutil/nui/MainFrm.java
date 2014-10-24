@@ -16,8 +16,7 @@ import ru.croacker.lbutil.nui.component.toolbar.MainToolBar;
  *
  * @author a_gumenyuk
  */
-@Configurable
-@Lazy
+@Component
 public class MainFrm extends javax.swing.JFrame {
 
   @Autowired

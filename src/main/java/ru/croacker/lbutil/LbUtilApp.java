@@ -1,6 +1,8 @@
 package ru.croacker.lbutil;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.croacker.lbutil.nui.MainFrm;
 
 import javax.swing.*;
@@ -11,18 +13,19 @@ import javax.swing.*;
 @Slf4j
 public class LbUtilApp implements Runnable {
 
-  JFrame frmMain;
+  @Autowired
+  MainFrm frmMain;
 
   public void run() {
     initLookAndFeel();
-    frmMain = ContextLoader.getInstance().getContext().getBean(MainFrm.class);
+//    frmMain = ContextLoader.getInstance().getContext().getBean(MainFrm.class);
     frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frmMain.setVisible(true);
   }
 
   public static void main(String[] args) {
     loadContext();
-    Runnable application = new LbUtilApp();
+    Runnable application = ContextLoader.getInstance().getContext().getBean(LbUtilApp.class);
     application.run();
   }
 
