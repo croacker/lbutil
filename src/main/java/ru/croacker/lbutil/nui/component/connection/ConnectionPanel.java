@@ -1,21 +1,38 @@
 package ru.croacker.lbutil.nui.component.connection;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import ru.croacker.lbutil.nui.component.common.UtilButton;
+import ru.croacker.lbutil.nui.component.common.UtilLabel;
+import ru.croacker.lbutil.nui.component.common.UtilTextField;
+
 import javax.swing.*;
 
 /**
  * Параметры текущего соединения
  */
+@Component
 public class ConnectionPanel extends JPanel {
 
-  private JLabel jlJdbcDriver;
+  @Autowired(@Value("JDBC-драйвер:") String url)
+  private UtilLabel jlJdbcDriver;
+  @Autowired
   private JdbDriverCombobox jcbJdbcDriver;
-  private JLabel jlUrl;
-  private JTextField jtfUrl;
-  private JLabel jlUser;
-  private JTextField jtfUser;
-  private JLabel jlPassword;
-  private JTextField jtfPassword;
-  private JButton jbTestConnection;
+  @Autowired
+  private UtilLabel jlUrl;
+  @Autowired
+  private UtilTextField jtfUrl;
+  @Autowired
+  private UtilLabel jlUser;
+  @Autowired
+  private UtilTextField jtfUser;
+  @Autowired
+  private UtilLabel jlPassword;
+  @Autowired
+  private UtilTextField jtfPassword;
+  @Autowired
+  private UtilButton jbTestConnection;
 
 
   public ConnectionPanel(){
@@ -26,19 +43,19 @@ public class ConnectionPanel extends JPanel {
     setToolTipText("Параметры соединения");
     setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-    jlJdbcDriver = new javax.swing.JLabel("JDBC-драйвер:");
+    jlJdbcDriver = new UtilLabel("JDBC-драйвер:");
     jcbJdbcDriver = new JdbDriverCombobox();
 
-    jlUrl = new JLabel("URL:");
-    jtfUrl = new JTextField();
+    jlUrl = new UtilLabel("URL:");
+    jtfUrl = new UtilTextField();
 
-    jlUser = new javax.swing.JLabel("Пользователь:");
-    jtfUser = new javax.swing.JTextField();
+    jlUser = new UtilLabel("Пользователь:");
+    jtfUser = new UtilTextField();
 
-    jlPassword = new javax.swing.JLabel();
-    jtfPassword = new javax.swing.JTextField();
+    jlPassword = new UtilLabel("Пароль:");
+    jtfPassword = new UtilTextField();
 
-    jbTestConnection = new javax.swing.JButton("Проверить");
+    jbTestConnection = new UtilButton("Проверить");
 
     javax.swing.GroupLayout jpConnectionLayout = new javax.swing.GroupLayout(this);
     setLayout(jpConnectionLayout);

@@ -21,7 +21,7 @@ public class MainFrm extends javax.swing.JFrame {
   private ExportChangelogPanel jpExport;
   private MainToolBar jtbMain;
 
-  public MainFrm(LbUtilApp app) {
+  public MainFrm() {
     initComponents();
   }
 

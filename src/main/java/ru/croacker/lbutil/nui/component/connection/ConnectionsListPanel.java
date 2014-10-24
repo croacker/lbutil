@@ -1,5 +1,6 @@
 package ru.croacker.lbutil.nui.component.connection;
 
+import org.springframework.stereotype.Component;
 import ru.croacker.lbutil.nui.component.ConnectionsPopupMenu;
 
 import javax.swing.*;
@@ -7,6 +8,7 @@ import javax.swing.*;
 /**
  *
  */
+@Component
 public class ConnectionsListPanel extends JPanel {
 
   private ConnectionsList jlConnectionsList;

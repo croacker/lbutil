@@ -1,6 +1,9 @@
 package ru.croacker.lbutil.nui.component.connection;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.croacker.lbutil.database.JdbcDriver;
+import ru.croacker.lbutil.service.IConfigurationService;
 
 import javax.swing.*;
 
@@ -8,7 +11,11 @@ import javax.swing.*;
  * Выбор JDBC драйвера
  *
  */
+@Component
 public class JdbDriverCombobox extends JComboBox<JdbcDriver>{
+
+  @Autowired
+  private IConfigurationService configurationService;
 
   public JdbDriverCombobox(){
     initComponents();
