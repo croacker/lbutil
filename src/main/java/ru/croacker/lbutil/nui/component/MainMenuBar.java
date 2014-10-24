@@ -3,6 +3,7 @@ package ru.croacker.lbutil.nui.component;
 import javax.swing.*;
 
 /**
+ *
  */
 public class MainMenuBar extends JMenuBar {
 
@@ -20,15 +21,19 @@ public class MainMenuBar extends JMenuBar {
   }
 
   private void initComponents() {
-    jmFile = new JMenu("‘‡ÈÎ");
-    jmiExit = new JMenuItem("‘‡ÈÎ");
+    jmFile = new JMenu("–§–∞–π–ª");
+    jmiExit = new JMenuItem("–§–∞–π–ª");
     jmFile.add(jmiExit);
     add(jmFile);
 
-    jmService = new JMenu("—Â‚ËÒ");
+    jmService = new JMenu("–°–µ—Ä–≤–∏—Å");
+    jmiParameters = new JMenuItem("–ü–∞—Ä–∞–º–µ—Ç—Ä—ã");
+    jmService.add(jmiParameters);
     add(jmService);
 
-    jmHelp = new JMenu("—Ô‡‚Í‡");
+    jmHelp = new JMenu("–°–ø—Ä–∞–≤–∫–∞");
+    jmiAbout = new JMenuItem("–û'–±");
+    jmHelp.add(jmiAbout);
     add(jmHelp);
   }
 

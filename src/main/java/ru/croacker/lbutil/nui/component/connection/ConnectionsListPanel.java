@@ -5,6 +5,7 @@ import ru.croacker.lbutil.nui.component.ConnectionsPopupMenu;
 import javax.swing.*;
 
 /**
+ *
  */
 public class ConnectionsListPanel extends JPanel {
 

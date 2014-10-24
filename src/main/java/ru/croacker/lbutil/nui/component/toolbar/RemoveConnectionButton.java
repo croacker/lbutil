@@ -3,6 +3,7 @@ package ru.croacker.lbutil.nui.component.toolbar;
 import javax.swing.*;
 
 /**
+ *
  */
 public class RemoveConnectionButton extends JButton {
 
@@ -11,7 +12,7 @@ public class RemoveConnectionButton extends JButton {
   }
 
   private void initComponents() {
-    setText("Удалить");
+    setText("РЈРґР°Р»РёС‚СЊ");
     setFocusable(false);
     setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
     setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);

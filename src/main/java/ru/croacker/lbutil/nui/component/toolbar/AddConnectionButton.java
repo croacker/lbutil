@@ -3,6 +3,7 @@ package ru.croacker.lbutil.nui.component.toolbar;
 import javax.swing.*;
 
 /**
+ *
  */
 public class AddConnectionButton extends JButton {
 
@@ -11,7 +12,7 @@ public class AddConnectionButton extends JButton {
   }
 
   private void initComponents() {
-    setText("Добавить");
+    setText("Р”РѕР±Р°РІРёС‚СЊ");
     setFocusable(false);
     setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
     setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);

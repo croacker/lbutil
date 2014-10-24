@@ -5,6 +5,7 @@ import ru.croacker.lbutil.ui.model.ConnectionUnitModel;
 import javax.swing.*;
 
 /**
+ *
  */
 public class ConnectionsList extends JList<ConnectionUnitModel> {
 

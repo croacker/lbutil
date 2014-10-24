@@ -3,6 +3,7 @@ package ru.croacker.lbutil.nui.component.exp;
 import javax.swing.*;
 
 /**
+ *
  */
 public class ExportChangelogPanel extends JPanel {
 
@@ -19,12 +20,12 @@ public class ExportChangelogPanel extends JPanel {
 
   private void initComponents() {
     setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    setToolTipText("Экспорт");
+    setToolTipText("Р­РєСЃРїРѕСЂС‚");
 
-    jlExportFile = new JLabel("Файл:");
+    jlExportFile = new JLabel("Р¤Р°Р№Р»:");
     jtfExportFile = new JTextField();
     jbSelectExportFile = new JButton("...");
-    jbExport = new JButton("Экспорт");
+    jbExport = new JButton("Р­РєСЃРїРѕСЂС‚");
 
     jpExportLayout = new javax.swing.GroupLayout(this);
     setLayout(jpExportLayout);

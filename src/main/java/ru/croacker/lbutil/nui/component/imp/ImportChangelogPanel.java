@@ -3,6 +3,7 @@ package ru.croacker.lbutil.nui.component.imp;
 import javax.swing.*;
 
 /**
+ *
  */
 public class ImportChangelogPanel extends JPanel {
 
@@ -19,12 +20,12 @@ public class ImportChangelogPanel extends JPanel {
 
   private void initComponents() {
     setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    setToolTipText("Èìïîðò");
+    setToolTipText("Ð˜Ð¼Ð¿Ð¾Ñ€Ñ‚");
 
-    jlImportFile = new JLabel("Ôàéë:");
+    jlImportFile = new JLabel("Ð¤Ð°Ð¹Ð»:");
     jtfImportFile = new JTextField();
     jbSelectImportFile = new JButton("...");
-    jbImport = new JButton("Èìïîðò");
+    jbImport = new JButton("Ð˜Ð¼Ð¿Ð¾Ñ€Ñ‚");
 
     jPanel5Layout = new javax.swing.GroupLayout(this);
 

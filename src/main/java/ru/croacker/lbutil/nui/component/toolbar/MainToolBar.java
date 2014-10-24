@@ -3,6 +3,7 @@ package ru.croacker.lbutil.nui.component.toolbar;
 import javax.swing.*;
 
 /**
+ *
  */
 public class MainToolBar extends JToolBar {
 

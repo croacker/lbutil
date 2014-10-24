@@ -5,7 +5,8 @@ import ru.croacker.lbutil.database.JdbcDriver;
 import javax.swing.*;
 
 /**
- * Выбор JDBC драйвера
+ * Р’С‹Р±РѕСЂ JDBC РґСЂР°Р№РІРµСЂР°
+ *
  */
 public class JdbDriverCombobox extends JComboBox<JdbcDriver>{
 

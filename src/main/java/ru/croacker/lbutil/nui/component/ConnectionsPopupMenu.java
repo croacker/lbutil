@@ -3,6 +3,7 @@ package ru.croacker.lbutil.nui.component;
 import javax.swing.*;
 
 /**
+ *
  */
 public class ConnectionsPopupMenu extends JPopupMenu {
 
@@ -16,11 +17,11 @@ public class ConnectionsPopupMenu extends JPopupMenu {
 
   private void initComponents() {
     jmiAddConnection = new JMenuItem();
-    jmiAddConnection.setText("Добавить");
+    jmiAddConnection.setText("Р”РѕР±Р°РІРёС‚СЊ");
     add(jmiAddConnection);
 
     jmiRemoveConnection = new JMenuItem();
-    jmiRemoveConnection.setText("Удалить");
+    jmiRemoveConnection.setText("РЈРґР°Р»РёС‚СЊ");
     add(jmiRemoveConnection);
   }
 
