@@ -1,5 +1,9 @@
 package ru.croacker.lbutil.nui;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 import ru.croacker.lbutil.LbUtilApp;
 import ru.croacker.lbutil.nui.component.MainMenuBar;
 import ru.croacker.lbutil.nui.component.connection.ConnectionPanel;
@@ -12,7 +16,12 @@ import ru.croacker.lbutil.nui.component.toolbar.MainToolBar;
  *
  * @author a_gumenyuk
  */
+@Configurable
+@Lazy
 public class MainFrm extends javax.swing.JFrame {
+
+  @Autowired
+  private MainMenuBar mainMenuBar;
 
   private ImportChangelogPanel jpImport;
   private ConnectionPanel jpConnection;
@@ -28,7 +37,7 @@ public class MainFrm extends javax.swing.JFrame {
   @SuppressWarnings("unchecked")
   private void initComponents() {
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-    setJMenuBar(new MainMenuBar());
+    setJMenuBar(mainMenuBar);
 
     jtbMain = new MainToolBar();
     jpContent = new javax.swing.JPanel();

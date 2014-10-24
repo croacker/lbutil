@@ -8,6 +8,7 @@ import javax.swing.*;
  */
 @Component
 public class UtilLabel extends JLabel{
+  public UtilLabel(){}
   public UtilLabel(String text) {
     super(text);
   }

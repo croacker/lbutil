@@ -7,9 +7,10 @@ import javax.swing.*;
 /**
  */
 @Component
-public class UtilTextField extends JTextField{
-  public UtilTextField(){}
-  public UtilTextField(String text){
+public class UtilMenuItem extends JMenuItem {
+  public UtilMenuItem(){}
+  public UtilMenuItem(String text){
     super(text);
   }
+
 }

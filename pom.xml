@@ -127,7 +127,7 @@
                             <goal>install-file</goal>
                         </goals>
                         <configuration>
-                            <!--<file>${project.basedir}/lib/${oracle.driver.lib}.jar</file>-->
+                            <file>${project.basedir}/lib/${oracle.driver.lib}.jar</file>
                             <file>${project.basedir}/lib/ojdbc6.jar</file>
                             <groupId>com.oracle</groupId>
                             <artifactId>ojdbc6</artifactId>
@@ -183,7 +183,7 @@
                         </program>
                     </programs>
                     <showConsoleWindow>false</showConsoleWindow>
-                    <configurationDirectory>conf</configurationDirectory>
+                    <configurationDirectory>resources</configurationDirectory>
                     <copyConfigurationDirectory>true</copyConfigurationDirectory>
                     <platforms>
                         <platform>unix</platform>

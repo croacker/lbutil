@@ -8,6 +8,9 @@ import javax.swing.*;
  */
 @Component
 public class UtilButton extends JButton{
+
+  public UtilButton(){}
+
   public UtilButton(String text) {
     super(text);
   }

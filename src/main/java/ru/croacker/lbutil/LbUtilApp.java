@@ -11,36 +11,34 @@ import javax.swing.*;
 @Slf4j
 public class LbUtilApp implements Runnable {
 
-    JFrame frmMain;
+  JFrame frmMain;
 
-    public void run() {
-        initLookAndFeel();
-        frmMain = new MainFrm();
-        frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frmMain.setVisible(true);
-    }
+  public void run() {
+    initLookAndFeel();
+    frmMain = ContextLoader.getInstance().getContext().getBean(MainFrm.class);
+    frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frmMain.setVisible(true);
+  }
 
-    public static void main( String[] args )
-    {
-        Runnable application = new LbUtilApp();
-        application.run();
-    }
+  public static void main(String[] args) {
+    loadContext();
+    Runnable application = new LbUtilApp();
+    application.run();
+  }
 
-    private void initLookAndFeel() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException e) {
-            log.error(e.getMessage(), e);
-        } catch (InstantiationException e) {
-            log.error(e.getMessage(), e);
-        } catch (IllegalAccessException e) {
-            log.error(e.getMessage(), e);
-        } catch (UnsupportedLookAndFeelException e) {
-            log.error(e.getMessage(), e);
-        }
-    }
+  private static void loadContext() {
+    ContextLoader.getInstance().load();
+  }
 
-    public void close(){
-        System.exit(0);
+  private void initLookAndFeel() {
+    try {
+      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    } catch (ClassNotFoundException|InstantiationException|IllegalAccessException|UnsupportedLookAndFeelException e) {
+      log.error(e.getMessage(), e);
     }
+  }
+
+  public void close() {
+    System.exit(0);
+  }
 }

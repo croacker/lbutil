@@ -15,7 +15,7 @@ import javax.swing.*;
 @Component
 public class ConnectionPanel extends JPanel {
 
-  @Autowired(@Value("JDBC-драйвер:") String url)
+  @Autowired()
   private UtilLabel jlJdbcDriver;
   @Autowired
   private JdbDriverCombobox jcbJdbcDriver;
