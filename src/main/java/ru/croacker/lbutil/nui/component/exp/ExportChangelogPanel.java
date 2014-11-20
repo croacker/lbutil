@@ -1,10 +1,14 @@
 package ru.croacker.lbutil.nui.component.exp;
 
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 
 /**
  *
  */
+@Component
 public class ExportChangelogPanel extends JPanel {
 
   private GroupLayout jpExportLayout;
@@ -15,9 +19,9 @@ public class ExportChangelogPanel extends JPanel {
   private JButton jbExport;
 
   public ExportChangelogPanel(){
-    initComponents();
   }
 
+  @PostConstruct
   private void initComponents() {
     setBorder(javax.swing.BorderFactory.createEtchedBorder());
     setToolTipText("Экспорт");

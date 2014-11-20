@@ -1,16 +1,18 @@
 package ru.croacker.lbutil.nui;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import ru.croacker.lbutil.LbUtilApp;
 import ru.croacker.lbutil.nui.component.MainMenuBar;
 import ru.croacker.lbutil.nui.component.connection.ConnectionPanel;
 import ru.croacker.lbutil.nui.component.connection.ConnectionsListPanel;
 import ru.croacker.lbutil.nui.component.exp.ExportChangelogPanel;
 import ru.croacker.lbutil.nui.component.imp.ImportChangelogPanel;
 import ru.croacker.lbutil.nui.component.toolbar.MainToolBar;
+
+import javax.annotation.PostConstruct;
+import javax.swing.*;
 
 /**
  *
@@ -19,31 +21,42 @@ import ru.croacker.lbutil.nui.component.toolbar.MainToolBar;
 @Component
 public class MainFrm extends javax.swing.JFrame {
 
+  private JPanel jpContent;
+
   @Autowired
+  @Getter @Setter
   private MainMenuBar mainMenuBar;
 
-  private ImportChangelogPanel jpImport;
-  private ConnectionPanel jpConnection;
-  private javax.swing.JPanel jpConnectionsListPanel;
-  private javax.swing.JPanel jpContent;
-  private ExportChangelogPanel jpExport;
+  @Autowired
+  @Getter @Setter
   private MainToolBar jtbMain;
 
+  @Autowired
+  @Getter @Setter
+  private ConnectionsListPanel jpConnectionsListPanel;
+
+  @Autowired
+  @Getter @Setter
+  private ConnectionPanel jpConnection;
+
+  @Autowired
+  @Getter @Setter
+  private ImportChangelogPanel jpImport;
+
+  @Autowired
+  @Getter @Setter
+  private ExportChangelogPanel jpExport;
+
   public MainFrm() {
-    initComponents();
   }
 
   @SuppressWarnings("unchecked")
-  private void initComponents() {
+  @PostConstruct
+  public void initComponents() {
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setJMenuBar(mainMenuBar);
 
-    jtbMain = new MainToolBar();
     jpContent = new javax.swing.JPanel();
-    jpConnectionsListPanel = new ConnectionsListPanel();
-    jpConnection = new ConnectionPanel();
-    jpExport = new ExportChangelogPanel();
-    jpImport = new ImportChangelogPanel();
 
     javax.swing.GroupLayout jpContentLayout = new javax.swing.GroupLayout(jpContent);
     jpContent.setLayout(jpContentLayout);
@@ -69,8 +82,6 @@ public class MainFrm extends javax.swing.JFrame {
                 .addComponent(jpImport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 99, Short.MAX_VALUE))
     );
-
-
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);

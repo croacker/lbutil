@@ -6,6 +6,7 @@ import ru.croacker.lbutil.service.ConfigurationService;
 import ru.croacker.lbutil.service.IConnectionsService;
 import ru.croacker.lbutil.ui.model.ConnectionUnitModel;
 
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 
 /**
@@ -18,9 +19,9 @@ public class ConnectionsList extends JList<ConnectionUnitModel> {
   private IConnectionsService configurationService;
 
   public ConnectionsList(){
-    initComponents();
   }
 
+  @PostConstruct
   private void initComponents() {
     setModel(new ConnectionUnitModel());
   }

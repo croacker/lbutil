@@ -18,8 +18,6 @@ public class LbUtilApp implements Runnable {
 
   public void run() {
     initLookAndFeel();
-//    frmMain = ContextLoader.getInstance().getContext().getBean(MainFrm.class);
-    frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frmMain.setVisible(true);
   }
 

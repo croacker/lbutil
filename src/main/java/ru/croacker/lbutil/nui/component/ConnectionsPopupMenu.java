@@ -1,10 +1,14 @@
 package ru.croacker.lbutil.nui.component;
 
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 
 /**
  *
  */
+@Component
 public class ConnectionsPopupMenu extends JPopupMenu {
 
   private JMenuItem jmiAddConnection;
@@ -12,9 +16,9 @@ public class ConnectionsPopupMenu extends JPopupMenu {
   private JMenuItem jmiRemoveConnection;
 
   public ConnectionsPopupMenu(){
-    initComponents();
   }
 
+  @PostConstruct
   private void initComponents() {
     jmiAddConnection = new JMenuItem();
     jmiAddConnection.setText("Добавить");

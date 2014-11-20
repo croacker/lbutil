@@ -3,6 +3,7 @@ package ru.croacker.lbutil.nui.component.connection;
 import org.springframework.stereotype.Component;
 import ru.croacker.lbutil.nui.component.ConnectionsPopupMenu;
 
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 
 /**
@@ -16,9 +17,9 @@ public class ConnectionsListPanel extends JPanel {
   private javax.swing.JScrollPane jspConnectionsListScrolPanel;
 
   public ConnectionsListPanel(){
-    initComponents();
   }
 
+  @PostConstruct
   private void initComponents() {
     jlConnectionsList = new ConnectionsList();
     jlConnectionsList.setComponentPopupMenu(new ConnectionsPopupMenu());

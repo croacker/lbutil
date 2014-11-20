@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.croacker.lbutil.database.JdbcDriver;
 import ru.croacker.lbutil.service.IConfigurationService;
 
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 
 /**
@@ -18,9 +19,9 @@ public class JdbDriverCombobox extends JComboBox<JdbcDriver>{
   private IConfigurationService configurationService;
 
   public JdbDriverCombobox(){
-    initComponents();
   }
 
+  @PostConstruct
   private void initComponents() {
     for(JdbcDriver jdbcDriver: JdbcDriver.values()){
       addItem(jdbcDriver);

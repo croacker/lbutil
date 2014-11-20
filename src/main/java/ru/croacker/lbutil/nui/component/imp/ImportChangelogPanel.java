@@ -1,10 +1,14 @@
 package ru.croacker.lbutil.nui.component.imp;
 
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 
 /**
  *
  */
+@Component
 public class ImportChangelogPanel extends JPanel {
 
   private GroupLayout jPanel5Layout;
@@ -18,6 +22,7 @@ public class ImportChangelogPanel extends JPanel {
     initComponents();
   }
 
+  @PostConstruct
   private void initComponents() {
     setBorder(javax.swing.BorderFactory.createEtchedBorder());
     setToolTipText("Импорт");

@@ -1,54 +1,55 @@
 package ru.croacker.lbutil.nui.component;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
-import ru.croacker.lbutil.nui.component.common.UtilMenu;
-import ru.croacker.lbutil.nui.component.common.UtilMenuItem;
 
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 
 /**
  *
  */
 @Component
-@Lazy
 public class MainMenuBar extends JMenuBar {
 
-  @Autowired
-  private UtilMenu jmFile;
-  @Autowired
-  private UtilMenuItem jmiExit;
+  @Getter  @Setter
+  private JMenu jmFile;
 
-  @Autowired
-  private UtilMenu jmService;
-  @Autowired
-  private UtilMenuItem jmiParameters;
+  @Getter  @Setter
+  private JMenuItem jmiExit;
 
-  @Autowired
-  private UtilMenu jmHelp;
-  @Autowired
-  private UtilMenuItem jmiAbout;
+  @Getter  @Setter
+  private JMenu jmService;
+
+  @Getter  @Setter
+  private JMenuItem jmiParameters;
+
+  @Getter  @Setter
+  private JMenu jmHelp;
+
+  @Getter  @Setter
+  private JMenuItem jmiAbout;
 
   public MainMenuBar(){
-    initComponents();
   }
 
-  private void initComponents() {
-//    jmFile.setText("Файл");
-//    jmiExit.setText("Файл");
-//    jmFile.add(jmiExit);
-//    add(jmFile);
-//
-//    jmService.setText("Сервис");
-//    jmiParameters.setText("Параметры");
-//    jmService.add(jmiParameters);
-//    add(jmService);
-//
-//    jmHelp.setText("Справка");
-//    jmiAbout.setText("О'б");
-//    jmHelp.add(jmiAbout);
-//    add(jmHelp);
+  @PostConstruct
+  public void initComponents() {
+    jmFile = new JMenu("Файл");
+    jmiExit = new JMenuItem("Файл");
+    jmFile.add(jmiExit);
+    add(jmFile);
+
+    jmService = new JMenu("Сервис");
+    jmiParameters = new JMenuItem("Параметры");
+    jmService.add(jmiParameters);
+    add(jmService);
+
+    jmHelp = new JMenu("Справка");
+    jmiAbout = new JMenuItem("О'б");
+    jmHelp.add(jmiAbout);
+    add(jmHelp);
   }
 
 }
