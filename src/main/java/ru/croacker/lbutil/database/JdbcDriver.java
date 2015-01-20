@@ -28,4 +28,9 @@ public enum JdbcDriver {
     @Getter
     @Setter
     private String driverName;
+
+    @Override
+    public String toString(){
+        return driverName;
+    }
 }

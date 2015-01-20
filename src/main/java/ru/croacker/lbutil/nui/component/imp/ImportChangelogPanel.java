@@ -1,9 +1,11 @@
 package ru.croacker.lbutil.nui.component.imp;
 
 import org.springframework.stereotype.Component;
+import ru.croacker.lbutil.nui.component.SelectFileButton;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 
 /**
  *
@@ -11,7 +13,7 @@ import javax.swing.*;
 @Component
 public class ImportChangelogPanel extends JPanel {
 
-  private GroupLayout jPanel5Layout;
+  private GroupLayout jpImportLayout;
 
   private JLabel jlImportFile;
   private JTextField jtfImportFile;
@@ -29,15 +31,15 @@ public class ImportChangelogPanel extends JPanel {
 
     jlImportFile = new JLabel("Файл:");
     jtfImportFile = new JTextField();
-    jbSelectImportFile = new JButton("...");
+    jbSelectImportFile = getSelectFile(jtfImportFile);
     jbImport = new JButton("Импорт");
 
-    jPanel5Layout = new javax.swing.GroupLayout(this);
+    jpImportLayout = new javax.swing.GroupLayout(this);
+    setLayout(jpImportLayout);
 
-    setLayout(jPanel5Layout);
-    jPanel5Layout.setHorizontalGroup(
-        jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+    jpImportLayout.setHorizontalGroup(
+        jpImportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpImportLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jlImportFile)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -45,14 +47,15 @@ public class ImportChangelogPanel extends JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbSelectImportFile, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
-                .addComponent(jbImport, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbImport, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
     );
-    jPanel5Layout.setVerticalGroup(
-        jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+
+    jpImportLayout.setVerticalGroup(
+        jpImportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpImportLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jpImportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlImportFile)
                     .addComponent(jtfImportFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbSelectImportFile)
@@ -61,5 +64,8 @@ public class ImportChangelogPanel extends JPanel {
     );
   }
 
+  private JButton getSelectFile(JTextComponent filenameVisualizer){
+    return new SelectFileButton(filenameVisualizer);
+  }
 
 }

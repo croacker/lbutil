@@ -13,6 +13,8 @@ import ru.croacker.lbutil.nui.component.toolbar.MainToolBar;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -47,6 +49,8 @@ public class MainFrm extends javax.swing.JFrame {
   @Getter @Setter
   private ExportChangelogPanel jpExport;
 
+  private JButton jbSave;
+
   public MainFrm() {
   }
 
@@ -58,6 +62,9 @@ public class MainFrm extends javax.swing.JFrame {
 
     jpContent = new javax.swing.JPanel();
 
+    jbSave = new JButton("Сохранить");
+    jbSave.addActionListener(getSaveActionListener());
+
     javax.swing.GroupLayout jpContentLayout = new javax.swing.GroupLayout(jpContent);
     jpContent.setLayout(jpContentLayout);
     jpContentLayout.setHorizontalGroup(
@@ -68,7 +75,8 @@ public class MainFrm extends javax.swing.JFrame {
                 .addGroup(jpContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpConnection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpExport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jpImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, 85))
                 .addContainerGap())
     );
     jpContentLayout.setVerticalGroup(
@@ -80,6 +88,7 @@ public class MainFrm extends javax.swing.JFrame {
                 .addComponent(jpExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpImport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbSave, GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 99, Short.MAX_VALUE))
     );
 
@@ -99,6 +108,19 @@ public class MainFrm extends javax.swing.JFrame {
     );
 
     pack();
+  }
+
+  private ActionListener getSaveActionListener(){
+    return new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        saveConfiguration();
+      }
+    };
+  }
+
+  private void saveConfiguration() {
+    jpConnectionsListPanel.saveConnection(jpConnection.getConnection());
   }
 
 }

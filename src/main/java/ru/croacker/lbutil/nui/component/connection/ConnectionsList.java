@@ -23,6 +23,7 @@ public class ConnectionsList extends JList<ConnectionUnitModel> {
 
   @PostConstruct
   private void initComponents() {
+    setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     setModel(new ConnectionUnitModel());
   }
 

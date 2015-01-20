@@ -1,7 +1,13 @@
 package ru.croacker.lbutil.nui.component.connection;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.croacker.lbutil.database.DbConnection;
 import ru.croacker.lbutil.nui.component.ConnectionsPopupMenu;
+import ru.croacker.lbutil.service.PersistsService;
+import ru.croacker.lbutil.ui.model.ConnectionUnitModel;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
@@ -15,6 +21,10 @@ public class ConnectionsListPanel extends JPanel {
   private ConnectionsList jlConnectionsList;
 
   private javax.swing.JScrollPane jspConnectionsListScrolPanel;
+
+  @Autowired
+  @Getter @Setter
+  private PersistsService persistService;
 
   public ConnectionsListPanel(){
   }
@@ -39,6 +49,41 @@ public class ConnectionsListPanel extends JPanel {
         jpConnectionsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jspConnectionsListScrolPanel)
     );
+
+    restoreConnections();
   }
 
+  /**
+   * Восстановить соединения из хранилища при запуске
+   * //TODO Впоследствие вынести в сервис
+   */
+  private void restoreConnections(){
+
+  }
+
+  /**
+   * Сохранить параметры соединения
+   * @param connection
+   */
+  public void saveConnection(DbConnection connection) {
+    DbConnection selectedConnection = getSelected();
+    if (selectedConnection == null){
+      selectedConnection = connection;
+    }
+    persistService.persists(selectedConnection);
+  }
+
+  /**
+   *
+   * @return
+   */
+  private DbConnection getSelected() {
+    ConnectionUnitModel connectionUnitModel = jlConnectionsList.getSelectedValue();
+    if(connectionUnitModel == null ||
+        connectionUnitModel.getSize() == 0){
+      return null;
+    }else {
+      return (DbConnection) connectionUnitModel.getElementAt(0);
+    }
+  }
 }

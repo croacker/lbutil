@@ -3,14 +3,12 @@ package ru.croacker.lbutil.database;
 import lombok.Getter;
 
 /**
- * Created with IntelliJ IDEA.
- * User: croacker
- * Date: 23.04.14
- * Time: 18:52
  * Соединение с БД
  */
 public class DbConnection {
 
+    @Getter
+    private Long id;
     @Getter
     private String jdbcDriver;
     @Getter
@@ -19,8 +17,11 @@ public class DbConnection {
     private String user;
     @Getter
     private String password;
-//    @Getter
-//    private String changelogFile;//TODO: Убрать
+
+    public DbConnection setId(Long id){
+        this.id = id;
+        return this;
+    }
 
     public DbConnection setJdbcDriver(String jdbcDriver) {
         this.jdbcDriver = jdbcDriver;
@@ -42,8 +43,4 @@ public class DbConnection {
         return this;
     }
 
-//    public DbConnection setChangelogFile(String changelogFile) {
-//        this.changelogFile = changelogFile;
-//        return this;
-//    }
 }

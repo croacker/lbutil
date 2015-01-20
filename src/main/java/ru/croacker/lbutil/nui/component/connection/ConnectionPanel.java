@@ -1,16 +1,24 @@
 package ru.croacker.lbutil.nui.component.connection;
 
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.croacker.lbutil.database.DbConnection;
+import ru.croacker.lbutil.service.LiquibaseService;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Параметры текущего соединения
  */
 @Component
 public class ConnectionPanel extends JPanel {
+
+  @Autowired
+  private LiquibaseService liquibaseService;
 
   @Autowired
   private JdbDriverCombobox jcbJdbcDriver;
@@ -23,6 +31,8 @@ public class ConnectionPanel extends JPanel {
   private JTextField jtfPassword;
   private JButton jbTestConnection;
 
+  private DbConnection currentConnection;
+
   public ConnectionPanel(){
   }
 
@@ -32,7 +42,6 @@ public class ConnectionPanel extends JPanel {
     setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
     jlJdbcDriver = new JLabel("JDBC-драйвер:");
-    jcbJdbcDriver = new JdbDriverCombobox();
 
     jlUrl = new JLabel("URL:");
     jtfUrl = new JTextField();
@@ -44,6 +53,7 @@ public class ConnectionPanel extends JPanel {
     jtfPassword = new JTextField();
 
     jbTestConnection = new JButton("Проверить");
+    jbTestConnection.addActionListener(getTestConnectionActionListener());
 
     javax.swing.GroupLayout jpConnectionLayout = new javax.swing.GroupLayout(this);
     setLayout(jpConnectionLayout);
@@ -98,4 +108,40 @@ public class ConnectionPanel extends JPanel {
 
   }
 
+  private ActionListener getTestConnectionActionListener() {
+    return new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        testConnection();
+      }
+    };
+  }
+
+  private void testConnection(){
+    JOptionPane.showMessageDialog(null,
+        liquibaseService.testConnection(getConnection()));
+  }
+
+  public DbConnection getConnection() {
+    if(currentConnection == null){
+      currentConnection = new DbConnection();
+    }
+    currentConnection.setId(null)
+        .setJdbcDriver(jcbJdbcDriver.getDriverName())
+        .setUrl(jtfUrl.getText())
+        .setUser(jtfUser.getText())
+        .setPassword(jtfPassword.getText());
+
+    return currentConnection;
+  }
+
+  public void setConnection(DbConnection connection){
+    currentConnection = connection;
+    if(currentConnection == null){
+      jcbJdbcDriver.setSelectedIndex(0);
+      jtfUrl.setText("");
+      jtfUser.setText("");
+      jtfPassword.setText("");
+    }
+  }
 }
