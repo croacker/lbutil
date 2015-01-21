@@ -6,6 +6,7 @@ import ru.croacker.lbutil.nui.component.SelectFileButton;
 import javax.annotation.PostConstruct;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -62,6 +63,14 @@ public class ImportChangelogPanel extends JPanel {
                     .addComponent(jbImport))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
+  }
+
+  public String getFileName(){
+    return jtfImportFile.getText();
+  }
+
+  public void addImportListener(ActionListener actionListener){
+    jbImport.addActionListener(actionListener);
   }
 
   private JButton getSelectFile(JTextComponent filenameVisualizer){

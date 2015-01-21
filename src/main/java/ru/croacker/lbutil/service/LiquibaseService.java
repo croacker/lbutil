@@ -1,10 +1,12 @@
 package ru.croacker.lbutil.service;
 
+import liquibase.Liquibase;
 import liquibase.database.Database;
 import liquibase.diff.output.DiffOutputControl;
 import liquibase.exception.DatabaseException;
 import liquibase.exception.LiquibaseException;
 import liquibase.integration.commandline.CommandLineUtils;
+import liquibase.resource.FileSystemResourceAccessor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.croacker.lbutil.database.DbConnection;
@@ -19,6 +21,8 @@ import java.io.IOException;
 @Slf4j
 public class LiquibaseService {
 
+  public static final String EMPTY_CONTEXT = "";
+
   public String testConnection(DbConnection connection) {
     String resultMessage;
     try {
@@ -32,14 +36,14 @@ public class LiquibaseService {
   }
 
   /**
-   * Применить файл наборов изменений к существующей БД
+   * Применить набор изменений к существующей БД
    * @throws LiquibaseException
    * @throws IOException
    * @throws ParserConfigurationException
    */
-  public void writeChangelog(DbConnection connection, String changelogFile) throws LiquibaseException, IOException, ParserConfigurationException {
-    CommandLineUtils.doGenerateChangeLog(changelogFile, getDatabase(connection), null, null,
-        null, "samebadu", null, null, new DiffOutputControl());
+  public void aplyChangelog(DbConnection connection, String changelogFile) throws LiquibaseException, IOException, ParserConfigurationException {
+    Liquibase liquibase = new Liquibase(changelogFile, new FileSystemResourceAccessor(), getDatabase(connection));
+    liquibase.update(EMPTY_CONTEXT);
   }
 
   /**

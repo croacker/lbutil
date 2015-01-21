@@ -1,7 +1,9 @@
 package ru.croacker.lbutil.nui;
 
+import liquibase.exception.LiquibaseException;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.croacker.lbutil.nui.component.MainMenuBar;
@@ -10,20 +12,27 @@ import ru.croacker.lbutil.nui.component.connection.ConnectionsListPanel;
 import ru.croacker.lbutil.nui.component.exp.ExportChangelogPanel;
 import ru.croacker.lbutil.nui.component.imp.ImportChangelogPanel;
 import ru.croacker.lbutil.nui.component.toolbar.MainToolBar;
+import ru.croacker.lbutil.service.LiquibaseService;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  *
  * @author a_gumenyuk
  */
 @Component
+@Slf4j
 public class MainFrm extends javax.swing.JFrame {
 
   private JPanel jpContent;
+
+  @Autowired
+  private LiquibaseService liquibaseService;
 
   @Autowired
   @Getter @Setter
@@ -64,6 +73,10 @@ public class MainFrm extends javax.swing.JFrame {
 
     jbSave = new JButton("Сохранить");
     jbSave.addActionListener(getSaveActionListener());
+
+    jpConnection.addTestConnectionListener(getTestConnectionActionListener());
+    jpImport.addImportListener(getImportButtonListener());
+    jpExport.addExportListener(getExportButtonListener());
 
     javax.swing.GroupLayout jpContentLayout = new javax.swing.GroupLayout(jpContent);
     jpContent.setLayout(jpContentLayout);
@@ -110,6 +123,33 @@ public class MainFrm extends javax.swing.JFrame {
     pack();
   }
 
+  private ActionListener getTestConnectionActionListener() {
+    return new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        testConnection();
+      }
+    };
+  }
+
+  private ActionListener getImportButtonListener() {
+    return new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        importChangelog();
+      }
+    };
+  }
+
+  private ActionListener getExportButtonListener() {
+    return new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        exportChangelog();
+      }
+    };
+  }
+
   private ActionListener getSaveActionListener(){
     return new ActionListener() {
       @Override
@@ -117,6 +157,31 @@ public class MainFrm extends javax.swing.JFrame {
         saveConfiguration();
       }
     };
+  }
+
+  private void testConnection(){
+    JOptionPane.showMessageDialog(null,
+        liquibaseService.testConnection(jpConnection.getConnection()));
+  }
+
+  private void importChangelog() {
+    try {
+      liquibaseService.aplyChangelog(jpConnection.getConnection(), jpImport.getFileName());
+      JOptionPane.showMessageDialog(this, "Импорт успешно завершен!");
+    } catch (Exception e) {
+      log.error(e.getMessage(), e);
+      JOptionPane.showMessageDialog(this, e.getMessage());
+    }
+  }
+
+  private void exportChangelog() {
+    try {
+      liquibaseService.createChangelog(jpConnection.getConnection(), jpExport.getFileName());
+      JOptionPane.showMessageDialog(this, "Экспорт успешно завершен!");
+    } catch (Exception e) {
+      log.error(e.getMessage(), e);
+      JOptionPane.showMessageDialog(null, e.getMessage());
+    }
   }
 
   private void saveConfiguration() {

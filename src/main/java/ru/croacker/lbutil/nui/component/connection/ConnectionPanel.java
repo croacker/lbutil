@@ -53,7 +53,7 @@ public class ConnectionPanel extends JPanel {
     jtfPassword = new JTextField();
 
     jbTestConnection = new JButton("Проверить");
-    jbTestConnection.addActionListener(getTestConnectionActionListener());
+//    jbTestConnection.addActionListener(getTestConnectionActionListener());
 
     javax.swing.GroupLayout jpConnectionLayout = new javax.swing.GroupLayout(this);
     setLayout(jpConnectionLayout);
@@ -108,14 +108,11 @@ public class ConnectionPanel extends JPanel {
 
   }
 
-  private ActionListener getTestConnectionActionListener() {
-    return new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        testConnection();
-      }
-    };
+  public void addTestConnectionListener(ActionListener actionListener){
+    jbTestConnection.addActionListener(actionListener);
   }
+
+
 
   private void testConnection(){
     JOptionPane.showMessageDialog(null,

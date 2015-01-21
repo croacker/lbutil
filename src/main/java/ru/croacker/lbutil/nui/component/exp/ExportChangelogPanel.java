@@ -5,9 +5,7 @@ import ru.croacker.lbutil.nui.component.SelectFileButton;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.JTextComponent;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -33,7 +31,7 @@ public class ExportChangelogPanel extends JPanel {
 
     jlExportFile = new JLabel("Файл:");
     jtfExportFile = new JTextField();
-    jbSelectExportFile = getSelectFile(jtfExportFile);
+    jbSelectExportFile = getSelectFileButton(jtfExportFile);
     jbExport = new JButton("Экспорт");
 
     jpExportLayout = new javax.swing.GroupLayout(this);
@@ -66,7 +64,15 @@ public class ExportChangelogPanel extends JPanel {
     );
   }
 
-  private JButton getSelectFile(JTextComponent filenameVisualizer){
+  public String getFileName(){
+    return jtfExportFile.getText();
+  }
+
+  public void addExportListener(ActionListener actionListener){
+    jbExport.addActionListener(actionListener);
+  }
+
+  private JButton getSelectFileButton(JTextComponent filenameVisualizer){
     return new SelectFileButton(filenameVisualizer);
   }
 
