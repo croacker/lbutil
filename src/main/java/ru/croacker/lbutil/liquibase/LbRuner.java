@@ -5,7 +5,7 @@ import liquibase.diff.output.DiffOutputControl;
 import liquibase.exception.DatabaseException;
 import liquibase.exception.LiquibaseException;
 import liquibase.integration.commandline.CommandLineUtils;
-import ru.croacker.lbutil.database.DbConnection;
+import ru.croacker.lbutil.database.DbConnectionDto;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
@@ -15,19 +15,19 @@ import java.io.IOException;
  */
 public class LbRuner {
 
-    private DbConnection dbConnection;
+    private DbConnectionDto dbConnectionDto;
 
-    public LbRuner(DbConnection dbConnection) {
-        this.dbConnection = dbConnection;
+    public LbRuner(DbConnectionDto dbConnectionDto) {
+        this.dbConnectionDto = dbConnectionDto;
     }
 
     public Database getDatabase() throws DatabaseException {
         return CommandLineUtils.createDatabaseObject(
                 getClass().getClassLoader(),
-                dbConnection.getUrl(),
-                dbConnection.getUser(),
-                dbConnection.getPassword(),
-                dbConnection.getJdbcDriver(), null, null, false, false, null, null, null, null);
+                dbConnectionDto.getUrl(),
+                dbConnectionDto.getUser(),
+                dbConnectionDto.getPassword(),
+                dbConnectionDto.getJdbcDriver(), null, null, false, false, null, null, null, null);
     }
 
     public void writeChangelog() throws LiquibaseException, IOException, ParserConfigurationException {

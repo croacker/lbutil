@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.croacker.lbutil.database.DbConnection;
+import ru.croacker.lbutil.database.DbConnectionDto;
 import ru.croacker.lbutil.nui.component.ConnectionsPopupMenu;
 import ru.croacker.lbutil.service.PersistsService;
 import ru.croacker.lbutil.ui.model.ConnectionUnitModel;
@@ -65,8 +65,8 @@ public class ConnectionsListPanel extends JPanel {
    * Сохранить параметры соединения
    * @param connection
    */
-  public void saveConnection(DbConnection connection) {
-    DbConnection selectedConnection = getSelected();
+  public void saveConnection(DbConnectionDto connection) {
+    DbConnectionDto selectedConnection = getSelected();
     if (selectedConnection == null){
       selectedConnection = connection;
     }
@@ -77,13 +77,13 @@ public class ConnectionsListPanel extends JPanel {
    *
    * @return
    */
-  private DbConnection getSelected() {
+  private DbConnectionDto getSelected() {
     ConnectionUnitModel connectionUnitModel = jlConnectionsList.getSelectedValue();
     if(connectionUnitModel == null ||
         connectionUnitModel.getSize() == 0){
       return null;
     }else {
-      return (DbConnection) connectionUnitModel.getElementAt(0);
+      return (DbConnectionDto) connectionUnitModel.getElementAt(0);
     }
   }
 }

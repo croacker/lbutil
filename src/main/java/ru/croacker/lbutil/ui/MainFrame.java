@@ -2,7 +2,7 @@ package ru.croacker.lbutil.ui;
 
 import lombok.extern.slf4j.Slf4j;
 import ru.croacker.lbutil.LbUtilApp;
-import ru.croacker.lbutil.database.DbConnection;
+import ru.croacker.lbutil.database.DbConnectionDto;
 import ru.croacker.lbutil.database.JdbcDriver;
 import ru.croacker.lbutil.ui.connection.ConnectionListModel;
 
@@ -132,19 +132,19 @@ public class MainFrame extends JFrame implements CloseableFrame, Observer {
     private ListModel getStubConnectionsListModel() {
         ConnectionListModel connectionListModel = new ConnectionListModel();
         connectionListModel.add(
-        new DbConnection().setJdbcDriver(JdbcDriver.H2.getDriverName())
+        new DbConnectionDto().setJdbcDriver(JdbcDriver.H2.getDriverName())
                 .setUrl("jdbc:h2:tcp://localhost/~/master;MODE=Oracle")
                 .setUser("master")
                 .setPassword("123"));
 
         connectionListModel.add(
-                new DbConnection().setJdbcDriver(JdbcDriver.POSTGRESQL.getDriverName())
+                new DbConnectionDto().setJdbcDriver(JdbcDriver.POSTGRESQL.getDriverName())
                         .setUrl("jdbc:postgresql://host/database")
                         .setUser("postgre")
                         .setPassword("postgre"));
 
         connectionListModel.add(
-                new DbConnection().setJdbcDriver(JdbcDriver.ORACLE.getDriverName())
+                new DbConnectionDto().setJdbcDriver(JdbcDriver.ORACLE.getDriverName())
                         .setUrl("jdbc:oracle:kprb:uts@//123")
                         .setUser("uts")
                         .setPassword("123"));

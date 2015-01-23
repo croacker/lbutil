@@ -1,6 +1,6 @@
 package ru.croacker.lbutil.ui.connection;
 
-import ru.croacker.lbutil.database.DbConnection;
+import ru.croacker.lbutil.database.DbConnectionDto;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -13,25 +13,25 @@ import java.util.List;
  * Time: 23:05
  * Модель списка соединений
  */
-public class ConnectionListModel extends AbstractListModel<DbConnection> {
+public class ConnectionListModel extends AbstractListModel<DbConnectionDto> {
 
-    List<DbConnection> connections = new ArrayList<>();
+    List<DbConnectionDto> connections = new ArrayList<>();
 
     @Override
     public int getSize() {
         return connections.size();
     }
 
-    public void add(DbConnection connection){
+    public void add(DbConnectionDto connection){
         connections.add(connection);
     }
 
-    public void remove(DbConnection connection){
+    public void remove(DbConnectionDto connection){
         connections.remove(connection);
     }
 
     @Override
-    public DbConnection getElementAt(int i) {
+    public DbConnectionDto getElementAt(int i) {
         return connections.get(i);
     }
 

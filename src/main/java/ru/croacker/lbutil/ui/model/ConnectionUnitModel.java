@@ -1,7 +1,5 @@
 package ru.croacker.lbutil.ui.model;
 
-import ru.croacker.lbutil.database.DbConnection;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;

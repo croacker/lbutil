@@ -1,14 +1,12 @@
 package ru.croacker.lbutil.nui.component.connection;
 
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.croacker.lbutil.database.DbConnection;
+import ru.croacker.lbutil.database.DbConnectionDto;
 import ru.croacker.lbutil.service.LiquibaseService;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -31,7 +29,7 @@ public class ConnectionPanel extends JPanel {
   private JTextField jtfPassword;
   private JButton jbTestConnection;
 
-  private DbConnection currentConnection;
+  private DbConnectionDto currentConnection;
 
   public ConnectionPanel(){
   }
@@ -119,9 +117,9 @@ public class ConnectionPanel extends JPanel {
         liquibaseService.testConnection(getConnection()));
   }
 
-  public DbConnection getConnection() {
+  public DbConnectionDto getConnection() {
     if(currentConnection == null){
-      currentConnection = new DbConnection();
+      currentConnection = new DbConnectionDto();
     }
     currentConnection.setId(null)
         .setJdbcDriver(jcbJdbcDriver.getDriverName())
@@ -132,7 +130,7 @@ public class ConnectionPanel extends JPanel {
     return currentConnection;
   }
 
-  public void setConnection(DbConnection connection){
+  public void setConnection(DbConnectionDto connection){
     currentConnection = connection;
     if(currentConnection == null){
       jcbJdbcDriver.setSelectedIndex(0);

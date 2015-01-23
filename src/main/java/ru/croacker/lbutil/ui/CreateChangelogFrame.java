@@ -5,7 +5,7 @@ import liquibase.exception.LiquibaseException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import ru.croacker.lbutil.LbUtilApp;
-import ru.croacker.lbutil.database.DbConnection;
+import ru.croacker.lbutil.database.DbConnectionDto;
 import ru.croacker.lbutil.liquibase.LbRuner;
 import ru.croacker.lbutil.ui.component.ChangelogFilePanel;
 import ru.croacker.lbutil.ui.component.DbConnectionPanel;
@@ -149,8 +149,8 @@ public class CreateChangelogFrame extends JFrame implements CloseableFrame{
                 resultMessage);
     }
 
-    private DbConnection getConnection(){
-        return new DbConnection()
+    private DbConnectionDto getConnection(){
+        return new DbConnectionDto()
                 .setJdbcDriver(dbConnectionPanel.getJdbcDriverName())
                 .setUrl(dbConnectionPanel.getUrl())
                 .setUser(dbConnectionPanel.getUser())

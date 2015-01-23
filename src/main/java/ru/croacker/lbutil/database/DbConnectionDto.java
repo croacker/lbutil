@@ -5,7 +5,7 @@ import lombok.Getter;
 /**
  * Соединение с БД
  */
-public class DbConnection {
+public class DbConnectionDto {
 
     @Getter
     private Long id;
@@ -18,27 +18,27 @@ public class DbConnection {
     @Getter
     private String password;
 
-    public DbConnection setId(Long id){
+    public DbConnectionDto setId(Long id){
         this.id = id;
         return this;
     }
 
-    public DbConnection setJdbcDriver(String jdbcDriver) {
+    public DbConnectionDto setJdbcDriver(String jdbcDriver) {
         this.jdbcDriver = jdbcDriver;
         return this;
     }
 
-    public DbConnection setUrl(String url) {
+    public DbConnectionDto setUrl(String url) {
         this.url = url;
         return this;
     }
 
-    public DbConnection setUser(String user) {
+    public DbConnectionDto setUser(String user) {
         this.user = user;
         return this;
     }
 
-    public DbConnection setPassword(String password) {
+    public DbConnectionDto setPassword(String password) {
         this.password = password;
         return this;
     }

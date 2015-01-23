@@ -9,7 +9,7 @@ import liquibase.integration.commandline.CommandLineUtils;
 import liquibase.resource.FileSystemResourceAccessor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.croacker.lbutil.database.DbConnection;
+import ru.croacker.lbutil.database.DbConnectionDto;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
@@ -23,7 +23,7 @@ public class LiquibaseService {
 
   public static final String EMPTY_CONTEXT = "";
 
-  public String testConnection(DbConnection connection) {
+  public String testConnection(DbConnectionDto connection) {
     String resultMessage;
     try {
       getDatabase(connection);
@@ -41,7 +41,7 @@ public class LiquibaseService {
    * @throws IOException
    * @throws ParserConfigurationException
    */
-  public void aplyChangelog(DbConnection connection, String changelogFile) throws LiquibaseException, IOException, ParserConfigurationException {
+  public void aplyChangelog(DbConnectionDto connection, String changelogFile) throws LiquibaseException, IOException, ParserConfigurationException {
     Liquibase liquibase = new Liquibase(changelogFile, new FileSystemResourceAccessor(), getDatabase(connection));
     liquibase.update(EMPTY_CONTEXT);
   }
@@ -52,12 +52,12 @@ public class LiquibaseService {
    * @throws IOException
    * @throws ParserConfigurationException
    */
-  public void createChangelog(DbConnection connection, String changelogFile) throws LiquibaseException, IOException, ParserConfigurationException {
+  public void createChangelog(DbConnectionDto connection, String changelogFile) throws LiquibaseException, IOException, ParserConfigurationException {
     CommandLineUtils.doGenerateChangeLog(changelogFile, getDatabase(connection), null, null,
         null, "samebadu", null, null, new DiffOutputControl());
   }
 
-  private Database getDatabase(DbConnection connection) throws DatabaseException {
+  private Database getDatabase(DbConnectionDto connection) throws DatabaseException {
     return CommandLineUtils.createDatabaseObject(
         getClass().getClassLoader(),
         connection.getUrl(),
