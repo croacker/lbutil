@@ -22,7 +22,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 /**
- *
  * @author a_gumenyuk
  */
 @Component
@@ -35,27 +34,33 @@ public class MainFrm extends javax.swing.JFrame {
   private LiquibaseService liquibaseService;
 
   @Autowired
-  @Getter @Setter
+  @Getter
+  @Setter
   private MainMenuBar mainMenuBar;
 
   @Autowired
-  @Getter @Setter
+  @Getter
+  @Setter
   private MainToolBar jtbMain;
 
   @Autowired
-  @Getter @Setter
+  @Getter
+  @Setter
   private ConnectionsListPanel jpConnectionsListPanel;
 
   @Autowired
-  @Getter @Setter
+  @Getter
+  @Setter
   private ConnectionPanel jpConnection;
 
   @Autowired
-  @Getter @Setter
+  @Getter
+  @Setter
   private ImportChangelogPanel jpImport;
 
   @Autowired
-  @Getter @Setter
+  @Getter
+  @Setter
   private ExportChangelogPanel jpExport;
 
   private JButton jbSave;
@@ -87,9 +92,9 @@ public class MainFrm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpConnection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, 85)
                     .addComponent(jpExport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, 85))
+                    .addComponent(jpImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
     );
     jpContentLayout.setVerticalGroup(
@@ -98,10 +103,11 @@ public class MainFrm extends javax.swing.JFrame {
             .addGroup(jpContentLayout.createSequentialGroup()
                 .addComponent(jpConnection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbSave, GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpImport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jbSave, GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 99, Short.MAX_VALUE))
     );
 
@@ -150,7 +156,7 @@ public class MainFrm extends javax.swing.JFrame {
     };
   }
 
-  private ActionListener getSaveActionListener(){
+  private ActionListener getSaveActionListener() {
     return new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -159,7 +165,7 @@ public class MainFrm extends javax.swing.JFrame {
     };
   }
 
-  private void testConnection(){
+  private void testConnection() {
     JOptionPane.showMessageDialog(null,
         liquibaseService.testConnection(jpConnection.getConnection()));
   }

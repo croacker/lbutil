@@ -51,7 +51,6 @@ public class ConnectionPanel extends JPanel {
     jtfPassword = new JTextField();
 
     jbTestConnection = new JButton("Проверить");
-//    jbTestConnection.addActionListener(getTestConnectionActionListener());
 
     javax.swing.GroupLayout jpConnectionLayout = new javax.swing.GroupLayout(this);
     setLayout(jpConnectionLayout);
