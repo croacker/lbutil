@@ -18,17 +18,38 @@ public class PersistsService {
   @Autowired
   private DbConnectionDao dbConnectionDao;
 
-  public List<DbConnection> getAll(){
-    return dbConnectionDao.findAll();
+  public List<DbConnectionDto> getAll(){
+    List<DbConnectionDto> connectionDtos = new ArrayList<>();
+    for (DbConnection dbConnection: dbConnectionDao.findAll()){
+      DbConnectionDto connectionDto = new DbConnectionDto();
+      connectionDto.setId(dbConnection.getId());
+      connectionDto.setName(dbConnection.getName() != null ? dbConnection.getName():dbConnection.getUrl());
+      connectionDto.setJdbcDriver(dbConnection.getJdbcDriver());
+      connectionDto.setUrl(dbConnection.getUrl());
+      connectionDto.setUser(dbConnection.getUser());
+      connectionDto.setPassword(dbConnection.getPassword());
+
+      connectionDtos.add(connectionDto);
+    }
+    return connectionDtos;
   }
 
   public void persists(DbConnectionDto connectionDto){
-    DbConnection connection = new DbConnection();
-    connection.setJdbcDriver(connectionDto.getJdbcDriver());
-    connection.setUrl(connectionDto.getUrl());
-    connection.setUser(connectionDto.getUser());
-    connection.setPassword(connectionDto.getPassword());
-    dbConnectionDao.persist(connection);
+    DbConnection dbConnection = dbConnectionDao.findById(connectionDto.getId());
+    if(dbConnection == null){
+      dbConnection = new DbConnection();
+    }
+    dbConnection.setName(connectionDto.getName());
+    dbConnection.setJdbcDriver(connectionDto.getJdbcDriver());
+    dbConnection.setUrl(connectionDto.getUrl());
+    dbConnection.setUser(connectionDto.getUser());
+    dbConnection.setPassword(connectionDto.getPassword());
+    dbConnectionDao.persist(dbConnection);
+  }
+
+  public void remove(DbConnectionDto connectionDto){
+    DbConnection dbConnection = dbConnectionDao.findById(connectionDto.getId());
+    dbConnectionDao.remove(dbConnection);
   }
 
 }

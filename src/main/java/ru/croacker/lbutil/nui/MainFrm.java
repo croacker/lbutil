@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.croacker.lbutil.database.DbConnectionDto;
 import ru.croacker.lbutil.nui.component.MainMenuBar;
 import ru.croacker.lbutil.nui.component.connection.ConnectionPanel;
 import ru.croacker.lbutil.nui.component.connection.ConnectionsListPanel;
@@ -13,9 +14,12 @@ import ru.croacker.lbutil.nui.component.exp.ExportChangelogPanel;
 import ru.croacker.lbutil.nui.component.imp.ImportChangelogPanel;
 import ru.croacker.lbutil.nui.component.toolbar.MainToolBar;
 import ru.croacker.lbutil.service.LiquibaseService;
+import ru.croacker.lbutil.service.PersistsService;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,6 +36,9 @@ public class MainFrm extends javax.swing.JFrame {
 
   @Autowired
   private LiquibaseService liquibaseService;
+
+  @Autowired
+  private PersistsService persistService;
 
   @Autowired
   @Getter
@@ -63,8 +70,6 @@ public class MainFrm extends javax.swing.JFrame {
   @Setter
   private ExportChangelogPanel jpExport;
 
-  private JButton jbSave;
-
   public MainFrm() {
   }
 
@@ -76,10 +81,9 @@ public class MainFrm extends javax.swing.JFrame {
 
     jpContent = new javax.swing.JPanel();
 
-    jbSave = new JButton("Сохранить");
-    jbSave.addActionListener(getSaveActionListener());
-
+    jpConnectionsListPanel.addListSelectionListener(getConnectionSelectionListener());
     jpConnection.addTestConnectionListener(getTestConnectionActionListener());
+    jpConnection.addSaveListener(getSaveActionListener());
     jpImport.addImportListener(getImportButtonListener());
     jpExport.addExportListener(getExportButtonListener());
 
@@ -92,7 +96,6 @@ public class MainFrm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpConnection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, 85)
                     .addComponent(jpExport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -103,7 +106,6 @@ public class MainFrm extends javax.swing.JFrame {
             .addGroup(jpContentLayout.createSequentialGroup()
                 .addComponent(jpConnection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbSave, GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -127,6 +129,7 @@ public class MainFrm extends javax.swing.JFrame {
     );
 
     pack();
+    restoreConnections();
   }
 
   private ActionListener getTestConnectionActionListener() {
@@ -165,6 +168,25 @@ public class MainFrm extends javax.swing.JFrame {
     };
   }
 
+  private ListSelectionListener getConnectionSelectionListener(){
+    return new ListSelectionListener() {
+      @Override
+      public void valueChanged(ListSelectionEvent e) {
+        aplyCurrentConnection();
+      }
+    };
+  }
+
+  /**
+   * Получить подключения из БД
+   */
+  private void restoreConnections(){
+    jpConnectionsListPanel.setConections(persistService.getAll());
+    if(jpConnectionsListPanel.getConnectionsCount() != 0){
+      aplyCurrentConnection();
+    }
+  }
+
   private void testConnection() {
     JOptionPane.showMessageDialog(null,
         liquibaseService.testConnection(jpConnection.getConnection()));
@@ -191,7 +213,10 @@ public class MainFrm extends javax.swing.JFrame {
   }
 
   private void saveConfiguration() {
-    jpConnectionsListPanel.saveConnection(jpConnection.getConnection());
+    persistService.persists(jpConnection.getConnection());
   }
 
+  private void aplyCurrentConnection(){
+    jpConnection.setConnection(jpConnectionsListPanel.getSelected());
+  }
 }

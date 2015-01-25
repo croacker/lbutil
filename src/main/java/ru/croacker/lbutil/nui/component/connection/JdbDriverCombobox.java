@@ -31,4 +31,13 @@ public class JdbDriverCombobox extends JComboBox<JdbcDriver>{
   public String getDriverName(){
     return ((JdbcDriver)getSelectedItem()).getDriverName();
   }
+
+  public void setDriver(String driverName){
+    for (int i = 0; i < getModel().getSize(); i++){
+      if(getModel().getElementAt(i).getDriverName().equals(driverName)){
+        setSelectedIndex(i);
+        break;
+      }
+    }
+  }
 }

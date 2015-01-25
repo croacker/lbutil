@@ -1,6 +1,7 @@
 package ru.croacker.lbutil.database;
 
 import lombok.Getter;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Соединение с БД
@@ -10,6 +11,8 @@ public class DbConnectionDto {
     @Getter
     private Long id;
     @Getter
+    private String name;
+    @Getter
     private String jdbcDriver;
     @Getter
     private String url;
@@ -17,6 +20,7 @@ public class DbConnectionDto {
     private String user;
     @Getter
     private String password;
+
 
     public DbConnectionDto setId(Long id){
         this.id = id;
@@ -43,4 +47,15 @@ public class DbConnectionDto {
         return this;
     }
 
+    public DbConnectionDto setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    @Override
+    public String toString(){
+        return "[" + getId() + "] " +
+            (!StringUtils.isEmpty(getName()) ? getName() :
+            (!StringUtils.isEmpty(getUrl()) ? getUrl() : getJdbcDriver()));
+    }
 }

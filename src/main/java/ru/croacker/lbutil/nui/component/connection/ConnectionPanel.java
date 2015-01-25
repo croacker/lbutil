@@ -15,9 +15,8 @@ import java.awt.event.ActionListener;
 @Component
 public class ConnectionPanel extends JPanel {
 
-  @Autowired
-  private LiquibaseService liquibaseService;
-
+  private JLabel jlName;
+  private JTextField jtfName;
   @Autowired
   private JdbDriverCombobox jcbJdbcDriver;
   private JLabel jlJdbcDriver;
@@ -28,16 +27,19 @@ public class ConnectionPanel extends JPanel {
   private JLabel jlPassword;
   private JTextField jtfPassword;
   private JButton jbTestConnection;
-
+  private JButton jbSave;
   private DbConnectionDto currentConnection;
 
-  public ConnectionPanel(){
+  public ConnectionPanel() {
   }
 
   @PostConstruct
   private void initComponents() {
     setToolTipText("Параметры соединения");
     setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jlName = new JLabel("Наименование:");
+    jtfName = new JTextField();
 
     jlJdbcDriver = new JLabel("JDBC-драйвер:");
 
@@ -51,76 +53,88 @@ public class ConnectionPanel extends JPanel {
     jtfPassword = new JTextField();
 
     jbTestConnection = new JButton("Проверить");
+    jbSave = new JButton("Сохранить");
 
-    javax.swing.GroupLayout jpConnectionLayout = new javax.swing.GroupLayout(this);
+    GroupLayout jpConnectionLayout = new GroupLayout(this);
     setLayout(jpConnectionLayout);
     jpConnectionLayout.setHorizontalGroup(
-        jpConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jpConnectionLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jpConnectionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpConnectionLayout.createSequentialGroup()
-                        .addComponent(jlJdbcDriver)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbJdbcDriver, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jtfUrl)
-                    .addGroup(jpConnectionLayout.createSequentialGroup()
-                        .addComponent(jlUrl)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jpConnectionLayout.createSequentialGroup()
-                        .addComponent(jlUser)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfUser)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlPassword)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfPassword)
-                            .addComponent(jbTestConnection, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))))
+                .addGroup(jpConnectionLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(jpConnectionLayout.createSequentialGroup()
+                            .addComponent(jlName)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jtfName, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jpConnectionLayout.createSequentialGroup()
+                            .addComponent(jlJdbcDriver)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jcbJdbcDriver, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jtfUrl)
+                        .addGroup(jpConnectionLayout.createSequentialGroup()
+                            .addComponent(jlUrl)
+                            .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(jpConnectionLayout.createSequentialGroup()
+                                .addComponent(jlUser)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfUser)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jlPassword)
+                                .addComponent(jtfPassword)
+                        )
+                        .addGroup(jpConnectionLayout.createSequentialGroup()
+                            .addGap(0, 50, Short.MAX_VALUE)
+                            .addComponent(jbTestConnection, GroupLayout.DEFAULT_SIZE, 92, 92)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jbSave))
+                )
                 .addContainerGap())
     );
     jpConnectionLayout.setVerticalGroup(
-        jpConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jpConnectionLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jpConnectionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jpConnectionLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlName)
+                    .addComponent(jtfName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpConnectionLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jlJdbcDriver)
-                    .addComponent(jcbJdbcDriver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jcbJdbcDriver, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlUrl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jtfUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtfUrl, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpConnectionLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(GroupLayout.Alignment.TRAILING, jpConnectionLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtfUser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addComponent(jlUser))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jtfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(GroupLayout.Alignment.TRAILING, jpConnectionLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtfPassword, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addComponent(jlPassword)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbTestConnection)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpConnectionLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)//
+                    .addComponent(jbTestConnection)
+                    .addComponent(jbSave))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
   }
 
-  public void addTestConnectionListener(ActionListener actionListener){
+  public void addTestConnectionListener(ActionListener actionListener) {
     jbTestConnection.addActionListener(actionListener);
   }
 
-
-
-  private void testConnection(){
-    JOptionPane.showMessageDialog(null,
-        liquibaseService.testConnection(getConnection()));
+  public void addSaveListener(ActionListener actionListener) {
+    jbSave.addActionListener(actionListener);
   }
 
   public DbConnectionDto getConnection() {
-    if(currentConnection == null){
+    if (currentConnection == null) {
       currentConnection = new DbConnectionDto();
     }
-    currentConnection.setId(null)
+    currentConnection.setName(jtfName.getText())
         .setJdbcDriver(jcbJdbcDriver.getDriverName())
         .setUrl(jtfUrl.getText())
         .setUser(jtfUser.getText())
@@ -129,13 +143,20 @@ public class ConnectionPanel extends JPanel {
     return currentConnection;
   }
 
-  public void setConnection(DbConnectionDto connection){
+  public void setConnection(DbConnectionDto connection) {
     currentConnection = connection;
-    if(currentConnection == null){
+    if (currentConnection == null) {
+      jtfName.setText("");
       jcbJdbcDriver.setSelectedIndex(0);
       jtfUrl.setText("");
       jtfUser.setText("");
       jtfPassword.setText("");
+    }else {
+      jtfName.setText(connection.getName());
+      jcbJdbcDriver.setDriver(connection.getJdbcDriver());
+      jtfUrl.setText(connection.getUrl());
+      jtfUser.setText(connection.getUser());
+      jtfPassword.setText(connection.getPassword());
     }
   }
 }

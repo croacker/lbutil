@@ -36,4 +36,11 @@ public class DbConnectionDao {
     entityManager.merge(dbConnection);
   }
 
+  public DbConnection findById(Long id) {
+    return entityManager.find(DbConnection.class, id);
+  }
+
+  public void remove(DbConnection dbConnection) {
+    entityManager.remove(dbConnection);
+  }
 }

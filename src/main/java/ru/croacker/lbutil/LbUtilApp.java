@@ -17,11 +17,11 @@ public class LbUtilApp implements Runnable {
   MainFrm frmMain;
 
   public void run() {
-    initLookAndFeel();
     frmMain.setVisible(true);
   }
 
   public static void main(String[] args) {
+    initLookAndFeel();
     loadContext();
     Runnable application = ContextLoader.getInstance().getContext().getBean(LbUtilApp.class);
     application.run();
@@ -31,7 +31,7 @@ public class LbUtilApp implements Runnable {
     ContextLoader.getInstance().load();
   }
 
-  private void initLookAndFeel() {
+  private static void initLookAndFeel() {
     try {
       UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
     } catch (ClassNotFoundException|InstantiationException|IllegalAccessException|UnsupportedLookAndFeelException e) {

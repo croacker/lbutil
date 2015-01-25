@@ -7,20 +7,23 @@ import org.springframework.stereotype.Component;
 import ru.croacker.lbutil.database.DbConnectionDto;
 import ru.croacker.lbutil.nui.component.ConnectionsPopupMenu;
 import ru.croacker.lbutil.service.PersistsService;
-import ru.croacker.lbutil.ui.model.ConnectionUnitModel;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.util.List;
 
 /**
  *
  */
 @Component
-public class ConnectionsListPanel extends JPanel {
+public class ConnectionsListPanel extends JPanel{
 
-  private ConnectionsList jlConnectionsList;
+  public ConnectionsList jlConnections;
 
-  private javax.swing.JScrollPane jspConnectionsListScrolPanel;
+  private JScrollPane jspConnections;
 
   @Autowired
   @Getter @Setter
@@ -31,59 +34,61 @@ public class ConnectionsListPanel extends JPanel {
 
   @PostConstruct
   private void initComponents() {
-    jlConnectionsList = new ConnectionsList();
-    jlConnectionsList.setComponentPopupMenu(new ConnectionsPopupMenu());
+    jlConnections = new ConnectionsList();
+    jlConnections.setComponentPopupMenu(new ConnectionsPopupMenu());
 
-    jspConnectionsListScrolPanel = new javax.swing.JScrollPane();
-    jspConnectionsListScrolPanel.setViewportView(jlConnectionsList);
+    jspConnections = new JScrollPane(jlConnections);
+    jspConnections.setPreferredSize(new Dimension(100, 100));
 
     javax.swing.GroupLayout jpConnectionsListLayout = new javax.swing.GroupLayout(this);
     setLayout(jpConnectionsListLayout);
     jpConnectionsListLayout.setHorizontalGroup(
         jpConnectionsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpConnectionsListLayout.createSequentialGroup()
-                .addComponent(jspConnectionsListScrolPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jspConnections, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 2, Short.MAX_VALUE))
     );
     jpConnectionsListLayout.setVerticalGroup(
         jpConnectionsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspConnectionsListScrolPanel)
+            .addComponent(jspConnections)
     );
-
-    restoreConnections();
-  }
-
-  /**
-   * Восстановить соединения из хранилища при запуске
-   * //TODO Впоследствие вынести в сервис
-   */
-  private void restoreConnections(){
-
-  }
-
-  /**
-   * Сохранить параметры соединения
-   * @param connection
-   */
-  public void saveConnection(DbConnectionDto connection) {
-    DbConnectionDto selectedConnection = getSelected();
-    if (selectedConnection == null){
-      selectedConnection = connection;
-    }
-    persistService.persists(selectedConnection);
   }
 
   /**
    *
    * @return
    */
-  private DbConnectionDto getSelected() {
-    ConnectionUnitModel connectionUnitModel = jlConnectionsList.getSelectedValue();
-    if(connectionUnitModel == null ||
-        connectionUnitModel.getSize() == 0){
-      return null;
+  public DbConnectionDto getSelected() {
+    return jlConnections.getSelectedValue();
+  }
+
+  public void setConections(final List<DbConnectionDto> connectionDtos) {
+    ((DefaultListModel)jlConnections.getModel()).removeAllElements();
+    if (SwingUtilities.isEventDispatchThread()){
+      addConnections(connectionDtos);
     }else {
-      return (DbConnectionDto) connectionUnitModel.getElementAt(0);
+      SwingUtilities.invokeLater(new Runnable() {
+        public void run() {
+          addConnections(connectionDtos);
+        }
+      });
     }
+    if(jlConnections.getModel().getSize() != 0){
+      jlConnections.setSelectionInterval(0, 0);
+    }
+  }
+
+  private void addConnections(List<DbConnectionDto> connectionDtos){
+    for (DbConnectionDto connectionDto: connectionDtos){
+      ((DefaultListModel) jlConnections.getModel()).addElement(connectionDto);
+    }
+  }
+
+  public int getConnectionsCount(){
+    return jlConnections.getModel().getSize();
+  }
+
+  public void addListSelectionListener(ListSelectionListener listener){
+    jlConnections.addListSelectionListener(listener);
   }
 }

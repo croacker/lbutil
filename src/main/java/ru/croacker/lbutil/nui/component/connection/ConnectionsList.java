@@ -1,10 +1,7 @@
 package ru.croacker.lbutil.nui.component.connection;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.croacker.lbutil.service.ConfigurationService;
-import ru.croacker.lbutil.service.IConnectionsService;
-import ru.croacker.lbutil.ui.model.ConnectionUnitModel;
+import ru.croacker.lbutil.database.DbConnectionDto;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
@@ -13,19 +10,16 @@ import javax.swing.*;
  *
  */
 @Component
-public class ConnectionsList extends JList<ConnectionUnitModel> {
-
-  @Autowired
-  private IConnectionsService configurationService;
+public class ConnectionsList extends JList<DbConnectionDto>{
 
   public ConnectionsList(){
+    super(new DefaultListModel());
   }
 
   @PostConstruct
   private void initComponents() {
     setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-    setModel(new ConnectionUnitModel());
+    setVisibleRowCount(-1);
   }
-
 
 }
