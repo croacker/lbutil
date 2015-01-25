@@ -1,12 +1,12 @@
 package ru.croacker.lbutil.data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 /**
- * Created by user on 24.01.2015.
+ *
  */
 @Entity
 @Table(name="db_connection")
@@ -14,15 +14,31 @@ public class DbConnection {
 
   @Id
   @GeneratedValue
+  @Getter @Setter
   private long id;
 
+  @Basic
+  @Column
+  @Getter @Setter
+  private String name;
 
+  @Basic
+  @Column
+  @Getter @Setter
+  private String jdbcDriver;
 
-  public long getId() {
-    return id;
-  }
+  @Basic
+  @Column
+  @Getter @Setter
+  private String url;
 
-  public void setId(long id) {
-    this.id = id;
-  }
+  @Basic
+  @Column
+  @Getter @Setter
+  private String user;
+
+  @Basic
+  @Column
+  @Getter @Setter
+  private String password;
 }

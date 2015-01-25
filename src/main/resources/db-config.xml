@@ -20,21 +20,6 @@
         <property name="validationQuery" value="SELECT 1"/>
     </bean>
 
-    <!--<bean id="mySessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">-->
-    <!--<property name="dataSource" ref="myDataSource"/>-->
-    <!--<property name="packagesToScan">-->
-    <!--<array>-->
-    <!--<value>ru.croacker.lbutil.data</value>-->
-    <!--</array>-->
-    <!--</property>-->
-    <!--<property name="hibernateProperties">-->
-    <!--<value>-->
-    <!--hibernate.dialect=org.hibernate.dialect.H2Dialect-->
-    <!--hibernate.hbm2ddl.auto=update-->
-    <!--</value>-->
-    <!--</property>-->
-    <!--</bean>-->
-
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="appDatasource"/>
         <property name="packagesToScan">
