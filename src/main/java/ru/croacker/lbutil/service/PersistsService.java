@@ -35,7 +35,10 @@ public class PersistsService {
   }
 
   public void persists(DbConnectionDto connectionDto){
-    DbConnection dbConnection = dbConnectionDao.findById(connectionDto.getId());
+    DbConnection dbConnection = null;
+    if(connectionDto.getId() != null) {
+      dbConnection = dbConnectionDao.findById(connectionDto.getId());
+    }
     if(dbConnection == null){
       dbConnection = new DbConnection();
     }
