@@ -1,10 +1,10 @@
 package ru.croacker.lbutil.nui.component.toolbar;
 
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -13,8 +13,10 @@ import java.awt.event.ActionListener;
 @Component
 public class MainToolBar extends JToolBar {
 
-  private AddConnectionButton jbAddConnection;
-  private RemoveConnectionButton jbRemoveConnection;
+  @Getter
+  private JButton jbNewConnection;
+  @Getter
+  private JButton jbRemoveConnection;
 
   public MainToolBar(){
   }
@@ -22,18 +24,23 @@ public class MainToolBar extends JToolBar {
   @PostConstruct
   private void initComponents() {
     setRollover(true);
+    setFloatable(false);
 
-    jbAddConnection = new AddConnectionButton();
-    add(jbAddConnection);
-    jbAddConnection.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(null, "НАЖАЛИ!");
-      }
-    });
+    jbNewConnection = new JButton(new ImageIcon(getClass().getResource("/img/btnAdd.png")));
+    jbNewConnection.setFocusable(false);
+    add(jbNewConnection);
 
-    jbRemoveConnection = new RemoveConnectionButton();
+    jbRemoveConnection = new JButton(new ImageIcon(getClass().getResource("/img/btnRemove.png")));
+    jbRemoveConnection.setFocusable(false);
     add(jbRemoveConnection);
+  }
+
+  public void addNewConnectionActionListener(ActionListener listener){
+    jbNewConnection.addActionListener(listener);
+  }
+
+  public void addRemoveConnectionActionListener(ActionListener listener){
+    jbRemoveConnection.addActionListener(listener);
   }
 
 }

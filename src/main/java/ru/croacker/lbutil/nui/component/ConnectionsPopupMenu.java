@@ -1,9 +1,12 @@
 package ru.croacker.lbutil.nui.component;
 
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -11,8 +14,10 @@ import javax.swing.*;
 @Component
 public class ConnectionsPopupMenu extends JPopupMenu {
 
-  private JMenuItem jmiAddConnection;
+  @Getter
+  private JMenuItem jmiNewConnection;
 
+  @Getter
   private JMenuItem jmiRemoveConnection;
 
   public ConnectionsPopupMenu(){
@@ -20,12 +25,20 @@ public class ConnectionsPopupMenu extends JPopupMenu {
 
   @PostConstruct
   private void initComponents() {
-    jmiAddConnection = new JMenuItem();
-    jmiAddConnection.setText("Добавить");
-    add(jmiAddConnection);
+    jmiNewConnection = new JMenuItem();
+    jmiNewConnection.setText("Добавить");
+    jmiNewConnection.setIcon(new ImageIcon(getClass().getResource("/img/btnAdd.png")));
+    jmiNewConnection.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+
+      }
+    });
+    add(jmiNewConnection);
 
     jmiRemoveConnection = new JMenuItem();
     jmiRemoveConnection.setText("Удалить");
+    jmiRemoveConnection.setIcon(new ImageIcon(getClass().getResource("/img/btnRemove.png")));
     add(jmiRemoveConnection);
   }
 

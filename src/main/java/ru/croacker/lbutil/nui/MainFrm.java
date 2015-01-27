@@ -81,6 +81,10 @@ public class MainFrm extends javax.swing.JFrame {
 
     jpContent = new javax.swing.JPanel();
 
+    jtbMain.addNewConnectionActionListener(getNewConnectionListener());
+    jtbMain.addRemoveConnectionActionListener(getRemoveConnectionListener());
+    jpConnectionsListPanel.addNewConnectionMenuListener(getNewConnectionListener());
+    jpConnectionsListPanel.addRemoveConnectionMenuListener(getRemoveConnectionListener());
     jpConnectionsListPanel.addListSelectionListener(getConnectionSelectionListener());
     jpConnection.addTestConnectionListener(getTestConnectionActionListener());
     jpConnection.addSaveListener(getSaveActionListener());
@@ -177,6 +181,24 @@ public class MainFrm extends javax.swing.JFrame {
     };
   }
 
+  private ActionListener getNewConnectionListener() {
+    return new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        newConnection();
+      }
+    };
+  }
+
+  private ActionListener getRemoveConnectionListener() {
+    return new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        removeConnection();
+      }
+    };
+  }
+
   /**
    * Получить подключения из БД
    */
@@ -185,6 +207,14 @@ public class MainFrm extends javax.swing.JFrame {
     if(jpConnectionsListPanel.getConnectionsCount() != 0){
       aplyCurrentConnection();
     }
+  }
+
+  private void newConnection() {
+    JOptionPane.showMessageDialog(null, "new conn");
+  }
+
+  private void removeConnection() {
+    JOptionPane.showMessageDialog(null, "remove conn");
   }
 
   private void testConnection() {
