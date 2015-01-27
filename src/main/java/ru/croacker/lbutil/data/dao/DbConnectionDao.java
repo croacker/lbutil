@@ -1,8 +1,5 @@
 package ru.croacker.lbutil.data.dao;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.croacker.lbutil.data.DbConnection;
 
@@ -15,7 +12,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Created by user on 24.01.2015.
+ * Дао соединения с БД
  */
 @Repository
 public class DbConnectionDao {
