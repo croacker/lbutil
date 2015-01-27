@@ -38,16 +38,19 @@ public class MainMenuBar extends JMenuBar {
   public void initComponents() {
     jmFile = new JMenu("Файл");
     jmiExit = new JMenuItem("Файл");
+    jmiExit.setIcon(new ImageIcon(getClass().getResource("/images/close.png")));
     jmFile.add(jmiExit);
     add(jmFile);
 
     jmService = new JMenu("Сервис");
     jmiParameters = new JMenuItem("Параметры");
+    jmiParameters.setIcon(new ImageIcon(getClass().getResource("/images/properties.png")));
     jmService.add(jmiParameters);
     add(jmService);
 
     jmHelp = new JMenu("Справка");
     jmiAbout = new JMenuItem("О'б");
+    jmiAbout.setIcon(new ImageIcon(getClass().getResource("/images/help.png")));
     jmHelp.add(jmiAbout);
     add(jmHelp);
   }

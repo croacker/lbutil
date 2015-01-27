@@ -73,8 +73,8 @@ public class MainFrm extends JFrame {
   @SuppressWarnings("unchecked")
   @PostConstruct
   public void initComponents() {
-    setIconImage((new ImageIcon(getClass().getResource("/img/btnAdd.png"))).getImage());
-    setTitle("UI для утилит Liquibase и MLCms");
+    setIconImage((new ImageIcon(getClass().getResource("/images/database.png"))).getImage());
+    setTitle("UI для утилиты Liquibase");
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setJMenuBar(mainMenuBar);
 

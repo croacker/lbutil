@@ -26,11 +26,11 @@ public class MainToolBar extends JToolBar {
     setRollover(true);
     setFloatable(false);
 
-    jbNewConnection = new JButton(new ImageIcon(getClass().getResource("/img/btnAdd.png")));
+    jbNewConnection = new JButton(new ImageIcon(getClass().getResource("/images/addDatabase.png")));
     jbNewConnection.setFocusable(false);
     add(jbNewConnection);
 
-    jbRemoveConnection = new JButton(new ImageIcon(getClass().getResource("/img/btnRemove.png")));
+    jbRemoveConnection = new JButton(new ImageIcon(getClass().getResource("/images/removeDatabase.png")));
     jbRemoveConnection.setFocusable(false);
     add(jbRemoveConnection);
   }

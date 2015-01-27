@@ -33,7 +33,9 @@ public class ImportChangelogPanel extends JPanel {
     jlImportFile = new JLabel("Файл:");
     jtfImportFile = new JTextField();
     jbSelectImportFile = getSelectFile(jtfImportFile);
+    jbSelectImportFile.setToolTipText("Выбор файла содержащего наборы изменений");
     jbImport = new JButton("Импорт");
+    jbImport.setToolTipText("Применить файл наборов изменений к БД");
 
     jpImportLayout = new javax.swing.GroupLayout(this);
     setLayout(jpImportLayout);

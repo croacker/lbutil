@@ -32,7 +32,9 @@ public class ExportChangelogPanel extends JPanel {
     jlExportFile = new JLabel("Файл:");
     jtfExportFile = new JTextField();
     jbSelectExportFile = getSelectFileButton(jtfExportFile);
+    jbSelectExportFile.setToolTipText("Выбор файла для экспорта наборов изменений");
     jbExport = new JButton("Экспорт");
+    jbExport.setToolTipText("Экспорт схемы БД в файл наборов изменений");
 
     jpExportLayout = new javax.swing.GroupLayout(this);
     setLayout(jpExportLayout);

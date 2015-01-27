@@ -53,7 +53,11 @@ public class ConnectionPanel extends JPanel {
     jtfPassword = new JTextField();
 
     jbTestConnection = new JButton("Проверить");
+    jbTestConnection.setToolTipText("Проверить соединение с БД");
+    jbTestConnection.setIcon(new ImageIcon(getClass().getResource("/images/check.png")));
+
     jbSave = new JButton("Сохранить");
+    jbSave.setToolTipText("Сохранить конфигурацию соединения с БД");
 
     GroupLayout jpConnectionLayout = new GroupLayout(this);
     setLayout(jpConnectionLayout);

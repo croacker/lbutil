@@ -27,7 +27,7 @@ public class ConnectionsPopupMenu extends JPopupMenu {
   private void initComponents() {
     jmiNewConnection = new JMenuItem();
     jmiNewConnection.setText("Добавить");
-    jmiNewConnection.setIcon(new ImageIcon(getClass().getResource("/img/btnAdd.png")));
+    jmiNewConnection.setIcon(new ImageIcon(getClass().getResource("/images/addDatabase.png")));
     jmiNewConnection.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -38,7 +38,7 @@ public class ConnectionsPopupMenu extends JPopupMenu {
 
     jmiRemoveConnection = new JMenuItem();
     jmiRemoveConnection.setText("Удалить");
-    jmiRemoveConnection.setIcon(new ImageIcon(getClass().getResource("/img/btnRemove.png")));
+    jmiRemoveConnection.setIcon(new ImageIcon(getClass().getResource("/images/removeDatabase.png")));
     add(jmiRemoveConnection);
   }
 
