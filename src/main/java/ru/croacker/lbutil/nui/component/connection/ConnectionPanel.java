@@ -2,12 +2,15 @@ package ru.croacker.lbutil.nui.component.connection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import ru.croacker.lbutil.database.DbConnectionDto;
-import ru.croacker.lbutil.service.LiquibaseService;
+import ru.croacker.lbutil.database.JdbcDriver;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 /**
  * Параметры текущего соединения
@@ -42,6 +45,7 @@ public class ConnectionPanel extends JPanel {
     jtfName = new JTextField();
 
     jlJdbcDriver = new JLabel("JDBC-драйвер:");
+    jcbJdbcDriver.addItemListener(getJdbcDriverChangeListener());
 
     jlUrl = new JLabel("URL:");
     jtfUrl = new JTextField();
@@ -134,6 +138,24 @@ public class ConnectionPanel extends JPanel {
     jbSave.addActionListener(actionListener);
   }
 
+  private ItemListener getJdbcDriverChangeListener() {
+    return new ItemListener() {
+      @Override
+      public void itemStateChanged(ItemEvent e) {
+        setUrlTemplate();
+      }
+    };
+  }
+
+  private void setUrlTemplate() {
+    if (StringUtils.isEmpty(jtfUrl.getText())
+        || JdbcDriver.isTemplate(jtfUrl.getText())) {
+      Object selectedItem = jcbJdbcDriver.getSelectedItem();
+      jtfUrl.setText(((JdbcDriver) selectedItem).getUrlTemplate());
+    }
+  }
+
+
   public DbConnectionDto getConnection() {
     if (currentConnection == null) {
       currentConnection = new DbConnectionDto();
@@ -155,7 +177,7 @@ public class ConnectionPanel extends JPanel {
       jtfUrl.setText("");
       jtfUser.setText("");
       jtfPassword.setText("");
-    }else {
+    } else {
       jtfName.setText(connection.getName());
       jcbJdbcDriver.setDriver(connection.getJdbcDriver());
       jtfUrl.setText(connection.getUrl());
