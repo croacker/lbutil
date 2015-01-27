@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.croacker.lbutil.data.DbConnection;
 import ru.croacker.lbutil.database.DbConnectionDto;
 import ru.croacker.lbutil.nui.component.ConnectionsPopupMenu;
 import ru.croacker.lbutil.service.PersistsService;
@@ -69,25 +70,57 @@ public class ConnectionsListPanel extends JPanel {
 
     public void setConections(final List<DbConnectionDto> connectionDtos) {
         ((DefaultListModel) jlConnections.getModel()).removeAllElements();
-        if (SwingUtilities.isEventDispatchThread()) {
-            addConnections(connectionDtos);
-        } else {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    addConnections(connectionDtos);
-                }
-            });
-        }
+        addConnections(connectionDtos);
         if (jlConnections.getModel().getSize() != 0) {
-            jlConnections.setSelectionInterval(0, 0);
+            jlConnections.setSelectedIndex(0);
         }
     }
 
-    private void addConnections(List<DbConnectionDto> connectionDtos) {
+    public void addConnections(List<DbConnectionDto> connectionDtos) {
         for (DbConnectionDto connectionDto : connectionDtos) {
-            ((DefaultListModel) jlConnections.getModel()).addElement(connectionDto);
+            addConnection(connectionDto);
         }
     }
+
+    public void addConnection(final DbConnectionDto connectionDto){
+        if (SwingUtilities.isEventDispatchThread()) {
+            ((DefaultListModel) jlConnections.getModel()).addElement(connectionDto);
+        } else {
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    ((DefaultListModel) jlConnections.getModel()).addElement(connectionDto);
+                }
+            });
+        }
+    }
+
+    //TODO убрать говнокод
+    public void removeConnection(final DbConnectionDto connectionDto){
+        final DefaultListModel listModel = (DefaultListModel) jlConnections.getModel();
+        if (SwingUtilities.isEventDispatchThread()) {
+            int idx = listModel.indexOf(connectionDto);
+            listModel.removeElement(connectionDto);
+            if(idx < listModel.size()){
+                jlConnections.setSelectedIndex(idx);
+            }else if(listModel.size() != 0){
+                jlConnections.setSelectedIndex(idx - 1);
+            }
+        } else {
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    int idx = listModel.indexOf(connectionDto);
+                    listModel.removeElement(connectionDto);
+                    if(idx < listModel.size()){
+                        jlConnections.setSelectedIndex(idx);
+                    }else if(listModel.size() != 0){
+                        jlConnections.setSelectedIndex(idx - 1);
+                    }
+                }
+            });
+        }
+    }
+
+
 
     public int getConnectionsCount() {
         return jlConnections.getModel().getSize();
@@ -103,5 +136,9 @@ public class ConnectionsListPanel extends JPanel {
 
     public void addRemoveConnectionMenuListener(ActionListener listener) {
         cpmConnections.getJmiRemoveConnection().addActionListener(listener);
+    }
+
+    public void clearSelection() {
+        jlConnections.clearSelection();
     }
 }

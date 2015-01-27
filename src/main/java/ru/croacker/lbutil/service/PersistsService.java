@@ -34,7 +34,7 @@ public class PersistsService {
     return connectionDtos;
   }
 
-  public void persists(DbConnectionDto connectionDto){
+  public DbConnectionDto persists(DbConnectionDto connectionDto){
     DbConnection dbConnection = null;
     if(connectionDto.getId() != null) {
       dbConnection = dbConnectionDao.findById(connectionDto.getId());
@@ -47,7 +47,10 @@ public class PersistsService {
     dbConnection.setUrl(connectionDto.getUrl());
     dbConnection.setUser(connectionDto.getUser());
     dbConnection.setPassword(connectionDto.getPassword());
-    dbConnectionDao.persist(dbConnection);
+    dbConnection = dbConnectionDao.persist(dbConnection);
+
+    connectionDto.setId(dbConnection.getId());
+    return connectionDto;
   }
 
   public void remove(DbConnectionDto connectionDto){

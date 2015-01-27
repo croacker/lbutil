@@ -1,11 +1,11 @@
 package ru.croacker.lbutil.nui;
 
-import liquibase.exception.LiquibaseException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.croacker.lbutil.data.DbConnection;
 import ru.croacker.lbutil.database.DbConnectionDto;
 import ru.croacker.lbutil.nui.component.MainMenuBar;
 import ru.croacker.lbutil.nui.component.connection.ConnectionPanel;
@@ -20,17 +20,15 @@ import javax.annotation.PostConstruct;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.xml.parsers.ParserConfigurationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 /**
  * @author a_gumenyuk
  */
 @Component
 @Slf4j
-public class MainFrm extends javax.swing.JFrame {
+public class MainFrm extends JFrame {
 
   private JPanel jpContent;
 
@@ -76,6 +74,8 @@ public class MainFrm extends javax.swing.JFrame {
   @SuppressWarnings("unchecked")
   @PostConstruct
   public void initComponents() {
+    setIconImage((new ImageIcon(getClass().getResource("/img/btnAdd.png"))).getImage());
+    setTitle("UI для утилит Liquibase и MLCms");
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setJMenuBar(mainMenuBar);
 
@@ -210,11 +210,17 @@ public class MainFrm extends javax.swing.JFrame {
   }
 
   private void newConnection() {
-    JOptionPane.showMessageDialog(null, "new conn");
+    jpConnectionsListPanel.clearSelection();
+    jpConnection.setConnection(null);
   }
 
   private void removeConnection() {
-    JOptionPane.showMessageDialog(null, "remove conn");
+    DbConnectionDto connectionDto = jpConnectionsListPanel.getSelected();
+    if(connectionDto != null){
+      persistService.remove(jpConnectionsListPanel.getSelected());
+      jpConnectionsListPanel.removeConnection(connectionDto);
+      jpConnection.setConnection(jpConnectionsListPanel.getSelected());
+    }
   }
 
   private void testConnection() {
@@ -243,7 +249,12 @@ public class MainFrm extends javax.swing.JFrame {
   }
 
   private void saveConfiguration() {
-    persistService.persists(jpConnection.getConnection());
+    DbConnectionDto connectionDto = jpConnection.getConnection();
+    boolean isNew = connectionDto.getId() == null;
+    connectionDto = persistService.persists(jpConnection.getConnection());
+    if(isNew){
+      jpConnectionsListPanel.addConnection(connectionDto);
+    }
   }
 
   private void aplyCurrentConnection(){

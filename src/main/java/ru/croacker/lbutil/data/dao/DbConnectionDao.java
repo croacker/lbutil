@@ -18,7 +18,6 @@ import java.util.List;
  * Created by user on 24.01.2015.
  */
 @Repository
-@Transactional
 public class DbConnectionDao {
 
   @PersistenceContext
@@ -32,15 +31,17 @@ public class DbConnectionDao {
     return entityManager.createQuery(query).getResultList();
   }
 
-  public void persist(DbConnection dbConnection){
-    entityManager.merge(dbConnection);
+  @Transactional
+  public DbConnection persist(DbConnection dbConnection){
+    return entityManager.merge(dbConnection);
   }
 
   public DbConnection findById(Long id) {
     return entityManager.find(DbConnection.class, id);
   }
 
+  @Transactional
   public void remove(DbConnection dbConnection) {
-    entityManager.remove(dbConnection);
+    entityManager.remove(entityManager.contains(dbConnection) ? dbConnection : entityManager.merge(dbConnection));
   }
 }
