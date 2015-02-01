@@ -33,7 +33,7 @@ public class ConnectionPanel extends JPanel {
   private JButton jbSave;
   private DbConnectionDto currentConnection;
 
-  public ConnectionPanel() {
+  public ConnectionPanel(){
   }
 
   @PostConstruct
